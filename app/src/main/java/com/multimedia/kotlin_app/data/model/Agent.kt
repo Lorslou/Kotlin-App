@@ -16,6 +16,9 @@ data class AgentInfoResponse(
 )
 */
 
+/*
 data class AgentRoleResponse(
     @SerializedName("displayName") val agentRoleName: String
 )
+
+ */

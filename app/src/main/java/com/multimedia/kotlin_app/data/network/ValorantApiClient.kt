@@ -8,6 +8,7 @@ import retrofit2.http.Path
 interface ValorantApiClient {
 
     @GET("/v1/agents/{agentUuid}")
-    suspend fun getAgentName(@Path("agentUuid") idAgent: String): Response<List<Agent>>
+    suspend fun getAgentId(@Path("agentUuid") idAgent: String): Response<Agent>
+    //suspend fun getAgentName(@Path("agentUuid") idAgent: String): Response<List<Agent>>
 
 }

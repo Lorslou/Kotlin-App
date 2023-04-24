@@ -31,7 +31,7 @@ class AgentSearchListActivity : AppCompatActivity() {
 
         binding.searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                searchByAgentName(query.orEmpty()) //me devuelves un agent existente o todos los que haya (en caso null)
+                searchByAgentId(query.orEmpty()) //me devuelves un agent existente o todos los que haya (en caso null)
 
                 return false //SIEMPRE se retorna en false
             }
@@ -41,9 +41,9 @@ class AgentSearchListActivity : AppCompatActivity() {
         })
     }
 
-    private fun searchByAgentName(query: String) {
+    private fun searchByAgentId(query: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            val myResponse = retrofit.create(ValorantApiClient::class.java).getAgentName(query)
+            val myResponse = retrofit.create(ValorantApiClient::class.java).getAgentId(query)
 
             if (myResponse.isSuccessful) {
                 Log.i("lorena", "funciona :)")
