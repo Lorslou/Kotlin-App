@@ -11,4 +11,5 @@
     <!-- COLORES PRUEBAS -->
     <color name="card1">#B2018786</color>
     <color name="card_background">#3CFFFFFF</color>
+    <color name="card_background_item">#65F2A8FF</color>
 </resources>

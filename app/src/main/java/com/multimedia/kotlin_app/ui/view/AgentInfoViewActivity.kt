@@ -51,5 +51,14 @@ class AgentInfoViewActivity : AppCompatActivity() {
         binding.tvDescription.text = agentData.data.agentDescription
         binding.ivAgentRoleImage.load(agentData.data.agentRole.agentRoleIcon)
         binding.tvAgentRoleName.text = agentData.data.agentRole.agentRoleName
+        binding.ivAbility1Image.load(agentData.data.agentAbilities[0].abilitiesIcon)
+        binding.ivAbility2Image.load(agentData.data.agentAbilities[1].abilitiesIcon)
+        binding.ivAbility3Image.load(agentData.data.agentAbilities[2].abilitiesIcon)
+        binding.ivAbility4Image.load(agentData.data.agentAbilities[3].abilitiesIcon)
+        binding.tvAbility1Name.text = agentData.data.agentAbilities[0].abilitiesName
+        binding.tvAbility2Name.text = agentData.data.agentAbilities[1].abilitiesName
+        binding.tvAbility3Name.text = agentData.data.agentAbilities[2].abilitiesName
+        binding.tvAbility4Name.text = agentData.data.agentAbilities[3].abilitiesName
+
     }
 }

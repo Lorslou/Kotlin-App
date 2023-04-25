@@ -15,7 +15,7 @@ data class AgentDataDisplay(
     @SerializedName("displayIcon") val agentIcon: String,
     @SerializedName("background") val agentBackground: String,
     @SerializedName("bustPortrait") val agentInfoPortrait: String,
-    //@SerializedName("abilities") val agentAbilities: AgentAbilities
+    @SerializedName("abilities") val agentAbilities: List<AgentAbilities>
 )
 
 data class AgentRole(
