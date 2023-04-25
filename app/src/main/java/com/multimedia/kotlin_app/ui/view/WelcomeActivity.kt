@@ -15,11 +15,11 @@ class WelcomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //TODO el get started vincularía a login si lo aplicase, no a la view del buscador
-        binding.btnAccessToApp.setOnClickListener { navigateToAgentSearchListActivity() }
+        binding.btnAccessToApp.setOnClickListener { accessToAgentSearchViewActivity() }
     }
 
-    private fun navigateToAgentSearchListActivity() {
-        val intent = Intent(this, AgentSearchListActivity::class.java)
+    private fun accessToAgentSearchViewActivity() {
+        val intent = Intent(this, AgentSearchViewActivity::class.java)
         startActivity(intent)
     }
 }

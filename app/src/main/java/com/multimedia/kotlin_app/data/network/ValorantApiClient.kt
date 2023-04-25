@@ -9,6 +9,12 @@ interface ValorantApiClient {
 
     @GET("/v1/agents/{agentUuid}")
     suspend fun getAgentId(@Path("agentUuid") idAgent: String): Response<Agent>
-    //suspend fun getAgentName(@Path("agentUuid") idAgent: String): Response<List<Agent>>
+    //suspend fun getAgentId(@Path("agentUuid") idAgent: String): Response<List<Agent>>
+
+    @GET("/v1/agents")
+    suspend fun getAgents(): Response<List<Agent>>
+
+    @GET("/v1/weapons")
+    suspend fun getWeapons(): Response<List<Agent>>
 
 }
