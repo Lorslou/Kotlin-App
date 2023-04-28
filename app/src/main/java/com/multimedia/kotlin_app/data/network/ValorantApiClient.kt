@@ -9,8 +9,8 @@ interface ValorantApiClient {
 
     @GET("/v1/agents/{agentUuid}")
     suspend fun getAgentId(@Path("agentUuid") idAgent: String): Response<Agent>
-    //suspend fun getAgentId(@Path("agentUuid") idAgent: String): Response<List<Agent>>
 
+    //TODO QUITAR EL V1
     @GET("/v1/agents")
     suspend fun getAgents(): Response<List<Agent>>
 

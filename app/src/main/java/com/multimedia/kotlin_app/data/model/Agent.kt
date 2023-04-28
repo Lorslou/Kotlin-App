@@ -26,5 +26,5 @@ data class AgentRole(
 data class AgentAbilities(
     @SerializedName("slot") val abilitiesSlot: String,
     @SerializedName("displayName") val abilitiesName: String,
-    @SerializedName("displayIcon") val abilitiesIcon: String,
+    @SerializedName("displayIcon") val abilitiesIcon: String
 )
