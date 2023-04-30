@@ -27,8 +27,7 @@ class AgentAdapter(
     override fun getItemCount() = agentList.size
 
     fun updateList(agentFound: AgentDataDisplay) {
-        //agentList = listOf(agentFound)
-        agentList = agentList.toMutableList().apply { add(agentFound) }
+        agentList = listOf(agentFound)
         notifyDataSetChanged()
     }
 
