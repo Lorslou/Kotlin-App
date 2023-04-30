@@ -9,6 +9,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.room.util.query
 import com.multimedia.kotlin_app.ui.viewmodel.AgentSearchViewModel
 import com.multimedia.kotlin_app.databinding.ActivityAgentSearchViewBinding
 import com.multimedia.kotlin_app.ui.view.AgentInfoViewActivity.Companion.AGENT_UUID
@@ -40,6 +41,11 @@ class AgentSearchViewActivity : AppCompatActivity() {
             }
             override fun onQueryTextChange(newText: String?) = false //esta fun se llama cada vez que escribamos
         })
+
+        adapter = AgentAdapter { agentID -> accessToAgentInfo(agentID) }
+        binding.rvAgent.setHasFixedSize(true)
+        binding.rvAgent.layoutManager = LinearLayoutManager(this)
+        binding.rvAgent.adapter = adapter
     }
 
     //viewModel nos informa a nosotros
@@ -48,14 +54,10 @@ class AgentSearchViewActivity : AppCompatActivity() {
             binding.progressBar.isVisible = it
         })
 
-        agentviewmodel.agentModel.observe(this, Observer {
-            adapter = AgentAdapter { agentID -> accessToAgentInfo(agentID) }
-            binding.rvAgent.setHasFixedSize(true)
-            binding.rvAgent.layoutManager = LinearLayoutManager(this)
-            binding.rvAgent.adapter = adapter
+        agentviewmodel.agentDisplay.observe(this, Observer {
+            adapter.updateAdapter(it)
         })
     }
-
 
     private fun accessToAgentInfo(agentID: String) {
         val intent = Intent(this, AgentInfoViewActivity::class.java)

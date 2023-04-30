@@ -24,7 +24,7 @@ class AgentSearchViewModel @Inject constructor(
     //private var retrofit: Retrofit = NetworkModule.provideRetrofit()
 
     val agentModel = MutableLiveData<Agent?>() //mostrar un solo agente
-    val agentDisplayData = MutableLiveData<AgentDataDisplay>()
+    val agentDisplay = MutableLiveData<AgentDataDisplay>()
     val showAllAgents = MutableLiveData<List<Agent>>() //mostrar todos los agentes
     val dataLoading = MutableLiveData<Boolean>() //para el círculo de loading
 
@@ -35,7 +35,7 @@ class AgentSearchViewModel @Inject constructor(
             dataLoading.postValue(true)
             val searchResult = GetSpecificAgentUseCase().invoke(agentID)
 
-            agentModel.postValue(searchResult)
+            agentDisplay.postValue(searchResult)
             dataLoading.postValue(false)
 
         }
