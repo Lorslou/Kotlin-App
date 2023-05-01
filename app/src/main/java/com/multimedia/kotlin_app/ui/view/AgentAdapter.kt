@@ -1,8 +1,9 @@
-package com.multimedia.kotlin_app
+package com.multimedia.kotlin_app.ui.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.multimedia.kotlin_app.R
 import com.multimedia.kotlin_app.data.model.AgentDataDisplay
 
 class AgentAdapter(
@@ -25,8 +26,8 @@ class AgentAdapter(
 
     override fun getItemCount() = agentList.size
 
-    fun updateList(listAgents: AgentDataDisplay) {
-        agentList = listOf(listAgents)
+    fun updateAdapter(agentFound: AgentDataDisplay) {
+        agentList = listOf(agentFound)
         notifyDataSetChanged()
     }
 

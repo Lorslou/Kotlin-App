@@ -1,13 +1,10 @@
-package com.multimedia.kotlin_app.data.model
+package com.multimedia.kotlin_app
 
 import com.google.gson.annotations.SerializedName
 
-data class Agent(
-    @SerializedName("status") val status: Int,
-    @SerializedName("data") val data: AgentDataDisplay
-)
-
-data class AgentDataDisplay(
+//AgentData es el tipo de dato devuelto por la API, pues Agent es una entidad de dominio que representa
+// un agente en la lógica de la aplicación
+data class AgentData (
     @SerializedName("uuid") val uuid: String,
     @SerializedName("displayName") val agentName: String,
     @SerializedName("description") val agentDescription: String,
