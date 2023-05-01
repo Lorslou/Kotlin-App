@@ -11,22 +11,22 @@ import com.multimedia.kotlin_app.utilities.AgentNotFoundException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.lang.Exception
+import javax.inject.Inject
 
-class AgentService {
-
-    private val retrofit = NetworkModule.provideRetrofit()
+class AgentService @Inject constructor(
+    private val apiClient: ValorantApiClient
+) {
 
     suspend fun getAgent(agentID: String): AgentDataDisplay {
         return withContext(Dispatchers.IO) {
-            val response = retrofit.create(ValorantApiClient::class.java).getAgentId(agentID) //TODO CAMBIAR LA FORMA DE LLAMAR A LA API
+            val response = apiClient.getAgentId(agentID)
 
             if (response.isSuccessful && response.body() != null) {
                 Log.i("lorena", "funciona :)")
                 Log.i("lorena", response.toString())
-                val agent1: AgentDataDisplay = response.body()!!.data
-                //response.body()!!
-                Log.i("lorena", agent1.toString())
-                agent1
+                val agentFound: AgentDataDisplay = response.body()!!.data
+                Log.i("lorena", agentFound.toString())
+                agentFound
             } else {
                 Log.i("lorena", "NO funciona :)")
                 throw AgentNotFoundException()

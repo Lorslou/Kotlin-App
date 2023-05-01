@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
@@ -55,7 +56,11 @@ class AgentSearchViewActivity : AppCompatActivity() {
         })
 
         agentviewmodel.agentDisplay.observe(this, Observer {
-            adapter.updateAdapter(it)
+            if (it != null) {
+                adapter.updateAdapter(it)
+            } else {
+                Toast.makeText(this, "El agente introducido no existe", Toast.LENGTH_SHORT).show()
+            }
         })
     }
 

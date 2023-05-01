@@ -17,14 +17,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AgentSearchViewModel @Inject constructor(
-    private val retrofit: Retrofit = NetworkModule.provideRetrofit(),
-    private val apiClient: ValorantApiClient
+    private val getSpecificAgentUseCase: GetSpecificAgentUseCase
 ): ViewModel() {
 
-    //private var retrofit: Retrofit = NetworkModule.provideRetrofit()
-
     val agentModel = MutableLiveData<Agent?>() //mostrar un solo agente
-    val agentDisplay = MutableLiveData<AgentDataDisplay>()
+    val agentDisplay = MutableLiveData<AgentDataDisplay?>()
     val showAllAgents = MutableLiveData<List<Agent>>() //mostrar todos los agentes
     val dataLoading = MutableLiveData<Boolean>() //para el círculo de loading
 
@@ -33,7 +30,8 @@ class AgentSearchViewModel @Inject constructor(
     fun onCreate(agentID: String) {
         viewModelScope.launch {
             dataLoading.postValue(true)
-            val searchResult = GetSpecificAgentUseCase().invoke(agentID)
+            //val searchResult = GetSpecificAgentUseCase().invoke(agentID)
+            val searchResult = getSpecificAgentUseCase.invoke(agentID)
 
             agentDisplay.postValue(searchResult)
             dataLoading.postValue(false)
