@@ -25,7 +25,7 @@ class AgentSearchViewModel @Inject constructor(
     val showAllAgents = MutableLiveData<List<Agent>>() //mostrar todos los agentes
     val dataLoading = MutableLiveData<Boolean>() //para el círculo de loading
 
-//dd
+
     //su llamada notifica al viewmodel que la pantalla se ha creado y podemos empezar a realizar cosas
     fun onCreate(agentID: String) {
         viewModelScope.launch {
