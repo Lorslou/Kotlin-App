@@ -3,16 +3,11 @@ package com.multimedia.kotlin_app.ui.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.multimedia.kotlin_app.GetSpecificAgentUseCase
+import com.multimedia.kotlin_app.domain.uc.GetSpecificAgentUseCase
 import com.multimedia.kotlin_app.data.model.Agent
 import com.multimedia.kotlin_app.data.model.AgentDataDisplay
-import com.multimedia.kotlin_app.data.network.ValorantApiClient
-import com.multimedia.kotlin_app.modules.NetworkModule
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.Retrofit
-import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
@@ -33,6 +28,7 @@ class AgentSearchViewModel @Inject constructor(
             //val searchResult = GetSpecificAgentUseCase().invoke(agentID)
             val searchResult = getSpecificAgentUseCase.invoke(agentID)
 
+            if (searchResult)
             agentDisplay.postValue(searchResult)
             dataLoading.postValue(false)
 

@@ -13,6 +13,11 @@ import kotlinx.coroutines.withContext
 import java.lang.Exception
 import javax.inject.Inject
 
+/*
+ * Clase que nos permite acceder a los agentes a través de internet (no en db local)
+ * y si lo va a hacer a través de internet, lo hará mediante esta clase, todas las llamadas serán
+ * desde esta class
+ */
 class AgentService @Inject constructor(
     private val apiClient: ValorantApiClient
 ) {
@@ -31,6 +36,13 @@ class AgentService @Inject constructor(
                 Log.i("lorena", "NO funciona :)")
                 throw AgentNotFoundException()
             }
+        }
+    }
+
+    suspend fun getAllAgents(): List<Agent> {
+        return withContext(Dispatchers.IO) {
+            val response = apiClient.getAgents()
+            response.body() ?: emptyList()
         }
     }
 
