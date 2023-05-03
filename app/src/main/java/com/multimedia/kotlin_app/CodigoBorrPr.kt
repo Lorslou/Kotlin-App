@@ -106,4 +106,29 @@ class CodigoBorrPr {
         }
     }
      */
+
+
+    /*
+    class AgentRepository @Inject constructor(
+    private val agentDao: AgentDao,
+    private val apiService: ApiService
+) {
+    suspend fun getAllAgents(): List<AgentEntity> {
+        // primero intentamos obtener los datos desde la API
+        val response = apiService.getAllAgents()
+        if (response.isSuccessful) {
+            // si la respuesta es exitosa, actualizamos la base de datos local
+            val agents = response.body() ?: emptyList()
+            agentDao.insertAgents(agents)
+        }
+        // devolvemos los datos de la base de datos, independientemente de si se han actualizado o no
+        return agentDao.getAllAgents()
+    }
+
+    suspend fun toggleAgentFavorite(uuid: String) {
+        agentDao.toggleAgentFavorite(uuid)
+    }
+}
+     */
+
 }

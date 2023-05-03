@@ -39,12 +39,17 @@ class AgentService @Inject constructor(
         }
     }
 
-    suspend fun getAllAgents(): List<Agent> {
+
+    /*
+    suspend fun getAllAgents(): Agent {
         return withContext(Dispatchers.IO) {
             val response = apiClient.getAgents()
-            response.body() ?: emptyList()
+            response.body()
         }
     }
+     */
+
+
 
 }
 

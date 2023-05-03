@@ -8,8 +8,10 @@ class GetAllAgentsUseCase @Inject constructor(
     private val repository: AgentRepository
 )
 {
-
-    suspend operator fun invoke(): List<AgentDomain> {
+/*
+suspend operator fun invoke(): List<AgentDomain> {
         val agents = repository.getAgentFromApi()
     }
+ */
+
 }

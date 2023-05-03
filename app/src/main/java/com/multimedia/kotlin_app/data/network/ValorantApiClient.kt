@@ -12,9 +12,6 @@ interface ValorantApiClient {
 
     //TODO QUITAR EL V1
     @GET("/v1/agents")
-    suspend fun getAgents(): Response<List<Agent>>
-
-    @GET("/v1/weapons")
-    suspend fun getWeapons(): Response<List<Agent>>
+    suspend fun getAgents(): Response<Agent>
 
 }

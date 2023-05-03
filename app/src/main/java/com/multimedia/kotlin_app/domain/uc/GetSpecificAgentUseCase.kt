@@ -9,9 +9,9 @@ class GetSpecificAgentUseCase @Inject constructor(
     private val repository: AgentRepository
 ) {
 
-    //suspend operator fun invoke(agentID: String): AgentDataDisplay = repository.getAgentById(agentID)
+    suspend operator fun invoke(agentID: String): AgentDataDisplay = repository.getAgentById(agentID)
 
-    suspend operator fun invoke(agentID: String): AgentDomain = repository.getAgentFromApi(agentID)
+    //suspend operator fun invoke(agentID: String): AgentDomain = repository.getAgentFromApi(agentID)
 
 
 

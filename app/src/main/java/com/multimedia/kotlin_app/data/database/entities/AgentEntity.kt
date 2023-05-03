@@ -14,7 +14,7 @@ data class AgentEntity(
     @ColumnInfo(name = "agentIcon") val agentIcon: String,
     @ColumnInfo(name = "agentBackground") val agentBackground: String,
     @ColumnInfo(name = "agentInfoPortrait") val agentInfoPortrait: String,
-    @ColumnInfo(name = "agentAbilities") val agentAbilities: List<AgentAbilitiesEntity>
+    @ColumnInfo(name = "agentAbilities") val agentAbilities: List<AgentAbilitiesEntity>,
 )
 
 @Entity(tableName = "agent_abilities")
@@ -31,6 +31,16 @@ data class AgentRoleEntity(
     @ColumnInfo(name = "agentRoleName") val agentRoleName: String
 )
 
+@Entity(tableName = "agent_favorites_table")
+data class AgentEntityFavs(
+    @PrimaryKey @ColumnInfo(name = "uuid") val uuid: String,
+    @ColumnInfo(name = "agentName") val agentName: String,
+    //@ColumnInfo(name = "agentDescription") val agentDescription: String,
+    @ColumnInfo(name = "agentIcon") val agentIcon: String,
+    @ColumnInfo(name = "isFavorite") var isFavorite: Boolean = false
+)
+
+/*
 fun AgentDomain.toDatabase() = AgentEntity(
     uuid = uuid,
     agentName = agentName,
@@ -52,5 +62,7 @@ fun AgentDomain.toDatabase() = AgentEntity(
     }
 
 )
+ */
+
 
 

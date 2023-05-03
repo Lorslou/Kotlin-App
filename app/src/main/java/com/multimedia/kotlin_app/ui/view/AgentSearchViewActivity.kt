@@ -36,9 +36,13 @@ class AgentSearchViewActivity : AppCompatActivity() {
     private fun initUI() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                //TODO si la query no es null
-                agentviewmodel.onCreate(query.orEmpty())
-                return false //SIEMPRE se retorna en false
+                if(query != null) {
+                    agentviewmodel.onCreate(query.orEmpty())
+                } else {
+                    //Toast.makeText(this, "Error al introducir un agente", Toast.LENGTH_SHORT).show()
+                }
+
+                return false
             }
             override fun onQueryTextChange(newText: String?) = false //esta fun se llama cada vez que escribamos
         })
@@ -69,6 +73,7 @@ class AgentSearchViewActivity : AppCompatActivity() {
         intent.putExtra(AGENT_UUID, agentID)
         startActivity(intent)
     }
+
 
 
 }
