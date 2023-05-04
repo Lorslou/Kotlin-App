@@ -14,10 +14,12 @@ import com.multimedia.kotlin_app.databinding.ActivityAgentInfoViewBinding
 import com.multimedia.kotlin_app.databinding.ItemAgentBinding
 import com.multimedia.kotlin_app.modules.NetworkModule
 import com.multimedia.kotlin_app.ui.viewmodel.AgentInfoViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class AgentInfoViewActivity : AppCompatActivity() {
 
     private val agentViewModel: AgentInfoViewModel by viewModels()
@@ -33,23 +35,19 @@ class AgentInfoViewActivity : AppCompatActivity() {
         binding = ActivityAgentInfoViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupObservers()
+        //setupObservers()
         val agentID: String = intent.getStringExtra(AGENT_UUID).orEmpty()
         getAgentData(agentID)
+
 
 
     }
 
     private fun setupObservers() {
-        agentViewModel.favOnOff.observe(this, Observer {
 
-        })
-
-        agentViewModel.favoriteAgents.observe(this, Observer {
-
-        })
     }
 
+    //TODO MEJORAR EL CÓDIGO DE ESTA FUNCTION
     private fun getAgentData(agentIdIntent: String) {
         CoroutineScope(Dispatchers.IO).launch {
             val agentDataShow =
@@ -64,7 +62,8 @@ class AgentInfoViewActivity : AppCompatActivity() {
 
     private fun createUI(agentData: Agent) {
         bindingShowData(agentData)
-        binding.btnFavorites.setOnClickListener { agentViewModel.turnOffOnFavorite(agentData.data.uuid) }
+        binding.btnFavorites.setOnClickListener { agentViewModel.switchFavoriteAgent(agentData.data.uuid) }
+
 
     }
 

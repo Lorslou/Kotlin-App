@@ -12,33 +12,40 @@ import javax.inject.Inject
 @HiltViewModel
 class AgentInfoViewModel @Inject constructor(
     private val repository: AgentRepository
-) : ViewModel(){
+) : ViewModel() {
 
     val favOnOff = MutableLiveData<Boolean>()
     val favoriteAgents = MutableLiveData<List<AgentEntityFavs>>()
 
-    fun turnOffOnFavorite(agentID: String) {
-        viewModelScope.launch {
-            val agentFav = repository.getAgentFromDB(agentID)
-            agentFav.isFavorite = !agentFav.isFavorite
-            repository.updateAgent(agentFav)
+    fun onCreate(agentID: String) {
+        switchFavoriteAgent(agentID)
+    }
 
+    fun switchFavoriteAgent(agentID: String) {
+        viewModelScope.launch  {
+            //TODO CON EL REPLACE NO CRASHEA
+            val agentFav = repository.getAgentFromFavorites(agentID) //comprueba si el agente ya está en la tabla de favoritos
+            if (agentFav == null) { // Si devuelve null, el agente no está en favoritos, lo insertamos
+                val agentData = repository.getAgentById(agentID)
+                val newAgentFav = AgentEntityFavs(
+                    agentData.uuid,
+                    agentData.agentName,
+                    agentData.agentIcon,
+                    true
+                )
+                repository.addAgentToFavorites(newAgentFav)
+            } else {
+                // El agente ya está en favoritos, actualizamos el campo isFavorite
+                agentFav.isFavorite = !agentFav.isFavorite
+                if (!agentFav.isFavorite) { //si isFavorite está en false
+                    repository.deleteAgentFromFavorites(agentFav)
+                } else { //el agente es favorito, actualiza los datos en la tabla de favs
+                    repository.updateAgent(agentFav)
+                }
             }
         }
-
-    fun loadFavoriteAgents() {
-        viewModelScope.launch {
-            val agents = repository.getFavoriteAgents()
-            favoriteAgents.postValue(agents)
-        }
     }
 
-    fun updateAgentFavoriteStatus(agentID: String) {
-        viewModelScope.launch {
-            val agentFav = repository.getAgentFromDB(agentID)
-
-        }
-    }
 }
 
 

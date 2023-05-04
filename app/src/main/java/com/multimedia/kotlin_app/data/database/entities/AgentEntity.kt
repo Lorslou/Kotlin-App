@@ -35,7 +35,6 @@ data class AgentRoleEntity(
 data class AgentEntityFavs(
     @PrimaryKey @ColumnInfo(name = "uuid") val uuid: String,
     @ColumnInfo(name = "agentName") val agentName: String,
-    //@ColumnInfo(name = "agentDescription") val agentDescription: String,
     @ColumnInfo(name = "agentIcon") val agentIcon: String,
     @ColumnInfo(name = "isFavorite") var isFavorite: Boolean = false
 )

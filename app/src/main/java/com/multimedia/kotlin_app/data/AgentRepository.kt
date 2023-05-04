@@ -26,6 +26,10 @@ class AgentRepository @Inject constructor(
         return agentDao.getAgentRequestedByUser(agentID)
     }
 
+    suspend fun getAgentFromFavorites(agentID: String): AgentEntityFavs? {
+        return agentDao.checkIfAgentFavorite(agentID)
+    }
+
     suspend fun updateAgent(agent: AgentEntityFavs) {
         withContext(Dispatchers.IO){
             agentDao.updateAgent(agent)
@@ -43,7 +47,7 @@ class AgentRepository @Inject constructor(
     }
 
     suspend fun deleteAgentFromFavorites(agent: AgentEntityFavs) {
-
+        agentDao.deleteFavoriteAgent(agent)
     }
 
 

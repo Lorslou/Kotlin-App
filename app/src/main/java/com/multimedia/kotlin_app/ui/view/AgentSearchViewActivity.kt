@@ -14,6 +14,7 @@ import androidx.room.util.query
 import com.multimedia.kotlin_app.ui.viewmodel.AgentSearchViewModel
 import com.multimedia.kotlin_app.databinding.ActivityAgentSearchViewBinding
 import com.multimedia.kotlin_app.ui.view.AgentInfoViewActivity.Companion.AGENT_UUID
+import com.multimedia.kotlin_app.ui.view.favorites.ShowFavoritesActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -51,9 +52,9 @@ class AgentSearchViewActivity : AppCompatActivity() {
         binding.rvAgent.setHasFixedSize(true)
         binding.rvAgent.layoutManager = LinearLayoutManager(this)
         binding.rvAgent.adapter = adapter
+        binding.btnToFavorites.setOnClickListener { accessToFavorites() }
     }
 
-    //viewModel nos informa a nosotros
     private fun setupObservers(){
         agentviewmodel.dataLoading.observe(this, Observer {
             binding.progressBar.isVisible = it
@@ -71,6 +72,11 @@ class AgentSearchViewActivity : AppCompatActivity() {
     private fun accessToAgentInfo(agentID: String) {
         val intent = Intent(this, AgentInfoViewActivity::class.java)
         intent.putExtra(AGENT_UUID, agentID)
+        startActivity(intent)
+    }
+
+    private fun accessToFavorites() {
+        val intent = Intent(this, ShowFavoritesActivity::class.java)
         startActivity(intent)
     }
 

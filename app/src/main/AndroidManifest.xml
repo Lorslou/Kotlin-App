@@ -17,7 +17,7 @@
         android:theme="@style/Theme.KotlinApp"
         tools:targetApi="31">
         <activity
-            android:name=".ShowFavoritesActivity"
+            android:name=".ui.view.favorites.ShowFavoritesActivity"
             android:exported="false" />
         <activity
             android:name=".ui.view.AgentInfoViewActivity"

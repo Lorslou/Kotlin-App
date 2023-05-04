@@ -22,8 +22,8 @@ class FavoritesAdapter : RecyclerView.Adapter<FavoritesViewHolder>() {
     override fun getItemCount() = favAgentsList.size
 
 
-    fun updateAdapter(favAgents: List<AgentEntityFavs>) {
-        favAgentsList = favAgents
+    fun updateAdapter(list: List<AgentEntityFavs>) {
+        favAgentsList = list
         notifyDataSetChanged()
     }
 

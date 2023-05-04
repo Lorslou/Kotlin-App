@@ -8,8 +8,13 @@ import com.multimedia.kotlin_app.data.model.AgentDataDisplay
 @Dao
 interface AgentDao {
 
-    @Query("SELECT uuid FROM agent_favorites_table WHERE uuid = agentID")
+    //se usa :agentID para indicar que ese valor será proporcionado por el método, en lugar de poner
+    // simplemente agentID que se interpretaría como una columna de la tabla
+    @Query("SELECT * FROM agent_favorites_table WHERE uuid = :agentID")
     suspend fun getAgentRequestedByUser(agentID:String): AgentEntityFavs
+
+    @Query("SELECT * FROM agent_favorites_table WHERE uuid = :agentID")
+    suspend fun checkIfAgentFavorite(agentID: String): AgentEntityFavs
 
     @Query("SELECT * FROM agent_data_table ORDER BY agentName DESC")
     suspend fun getAllAgents(): List<AgentEntity>
@@ -29,4 +34,8 @@ interface AgentDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavoriteAgent(agent: AgentEntityFavs)
+
+    @Delete
+    suspend fun deleteFavoriteAgent(agent: AgentEntityFavs)
+
 }
