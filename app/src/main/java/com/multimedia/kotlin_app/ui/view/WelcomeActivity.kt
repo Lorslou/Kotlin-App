@@ -3,6 +3,7 @@ package com.multimedia.kotlin_app.ui.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.multimedia.kotlin_app.MainActivity
 import com.multimedia.kotlin_app.databinding.ActivityWelcomeBinding
 
 class WelcomeActivity : AppCompatActivity() {
@@ -15,11 +16,11 @@ class WelcomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //TODO el get started vincularía a login si lo aplicase, no a la view del buscador
-        binding.btnAccessToApp.setOnClickListener { accessToAgentSearchViewActivity() }
+        binding.btnAccessToApp.setOnClickListener { accessToMainActivity() }
     }
 
-    private fun accessToAgentSearchViewActivity() {
-        val intent = Intent(this, AgentSearchViewActivity::class.java)
+    private fun accessToMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
 }
