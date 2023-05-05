@@ -3,6 +3,7 @@ package com.multimedia.kotlin_app.data.database.dao
 import androidx.room.*
 import com.multimedia.kotlin_app.data.database.entities.AgentEntity
 import com.multimedia.kotlin_app.data.database.entities.AgentEntityFavs
+import com.multimedia.kotlin_app.data.database.entities.AllAgentsEntity
 import com.multimedia.kotlin_app.data.model.AgentDataDisplay
 
 @Dao
@@ -20,7 +21,7 @@ interface AgentDao {
     suspend fun getAllAgents(): List<AgentEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllAgents(quotes:List<AgentEntity>)
+    suspend fun insertAllAgents(agents:AllAgentsEntity)
 
     @Update
     suspend fun updateAgent(agent: AgentEntityFavs)
@@ -37,5 +38,6 @@ interface AgentDao {
 
     @Delete
     suspend fun deleteFavoriteAgent(agent: AgentEntityFavs)
+
 
 }

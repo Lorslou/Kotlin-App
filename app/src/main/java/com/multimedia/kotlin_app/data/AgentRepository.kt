@@ -1,12 +1,11 @@
 package com.multimedia.kotlin_app.data
 
-import com.multimedia.kotlin_app.domain.model.AgentDomain
 import com.multimedia.kotlin_app.AgentService
 import com.multimedia.kotlin_app.data.database.dao.AgentDao
-import com.multimedia.kotlin_app.data.database.entities.AgentEntity
 import com.multimedia.kotlin_app.data.database.entities.AgentEntityFavs
+import com.multimedia.kotlin_app.data.database.entities.AllAgentsEntity
+import com.multimedia.kotlin_app.data.model.Agent
 import com.multimedia.kotlin_app.data.model.AgentDataDisplay
-import com.multimedia.kotlin_app.domain.model.toDomain
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -17,13 +16,13 @@ class AgentRepository @Inject constructor(
 ) {
 
 
-    suspend fun getAgentById(agentID: String): AgentDataDisplay {
+    suspend fun getAgentById(agentID: String): AgentDataDisplay? {
     val service = api.getAgent(agentID)
     return service
     }
 
-    suspend fun getAgentFromDB(agentID: String): AgentEntityFavs {
-        return agentDao.getAgentRequestedByUser(agentID)
+    suspend fun getAllAgents(): Agent? {
+        return api.getAllAgents()
     }
 
     suspend fun getAgentFromFavorites(agentID: String): AgentEntityFavs? {
@@ -50,15 +49,12 @@ class AgentRepository @Inject constructor(
         agentDao.deleteFavoriteAgent(agent)
     }
 
-
-
-
-    /*
-    suspend fun getAllAgents(): List<AgentEntity> {
-        val service = api.getAllAgents()
-        if (service.)
+    suspend fun addAgentsToDb(agents: AllAgentsEntity) {
+        agentDao.insertAllAgents(agents)
     }
-     */
+
+
+
 
 
 
@@ -82,6 +78,12 @@ class AgentRepository @Inject constructor(
     suspend fun getAllAgentsFromDatabase(): List<AgentDomain> {
         val response: List<AgentEntity> = agentDao.getAllAgents()
         return response.map { it.toDomain() }
+    }
+     */
+
+    /*
+    suspend fun getAgentFromDB(agentID: String): AgentEntityFavs {
+        return agentDao.getAgentRequestedByUser(agentID)
     }
      */
 

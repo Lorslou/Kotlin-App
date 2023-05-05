@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.multimedia.kotlin_app.R
+import com.multimedia.kotlin_app.data.model.Agent
 import com.multimedia.kotlin_app.data.model.AgentDataDisplay
 
 class AgentAdapter(
     private var agentList: List<AgentDataDisplay> = emptyList(),
+    //private var allAgentsList: List<Agent> = emptyList(),
     private val accessToAgentInfo: (String) -> Unit
 ) :
     RecyclerView.Adapter<AgentViewHolder>() {
@@ -28,6 +30,19 @@ class AgentAdapter(
 
     fun updateAdapter(agentFound: AgentDataDisplay) {
         agentList = listOf(agentFound)
+        notifyDataSetChanged()
+    }
+
+    /*
+    fun updateAdapterAllAgents(allAgents: List<Agent>) {
+        allAgentsList = allAgents
+        notifyDataSetChanged()
+    }
+     */
+
+
+    fun clearAdapter(){
+        agentList = emptyList()
         notifyDataSetChanged()
     }
 

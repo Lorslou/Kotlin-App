@@ -39,6 +39,13 @@ data class AgentEntityFavs(
     @ColumnInfo(name = "isFavorite") var isFavorite: Boolean = false
 )
 
+@Entity(tableName = "agent_info_table")
+data class AllAgentsEntity(
+    @PrimaryKey @ColumnInfo(name = "uuid") val uuid: String,
+    @ColumnInfo(name = "agentName") val agentName: String,
+)
+
+
 /*
 fun AgentDomain.toDatabase() = AgentEntity(
     uuid = uuid,

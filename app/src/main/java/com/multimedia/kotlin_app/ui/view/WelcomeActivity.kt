@@ -4,9 +4,22 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.multimedia.kotlin_app.MainActivity
+import com.multimedia.kotlin_app.data.AgentRepository
+import com.multimedia.kotlin_app.data.database.entities.AgentEntityFavs
+import com.multimedia.kotlin_app.data.database.entities.AllAgentsEntity
+import com.multimedia.kotlin_app.data.model.Agent
+import com.multimedia.kotlin_app.data.model.AgentDataDisplay
 import com.multimedia.kotlin_app.databinding.ActivityWelcomeBinding
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class WelcomeActivity : AppCompatActivity() {
+@AndroidEntryPoint
+class WelcomeActivity @Inject constructor(
+    private val repository: AgentRepository
+) : AppCompatActivity() {
 
     private lateinit var binding: ActivityWelcomeBinding
 
@@ -20,7 +33,24 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun accessToMainActivity() {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, AgentSearchViewActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun loadAgentsToDb() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val agentEntities = mutableListOf<AllAgentsEntity>()
+            val agents: Agent? = repository.getAllAgents()
+            val agentDataList = listOf(agents?.data)
+
+            for (agentData in agentDataList) {
+                val listOfAgents = AllAgentsEntity(
+                    agents?.data?.uuid.orEmpty(),
+                    agents?.data?.agentName.orEmpty()
+                )
+                repository.addAgentsToDb(listOfAgents)
+            }
+
+        }
     }
 }

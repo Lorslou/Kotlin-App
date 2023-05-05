@@ -39,11 +39,7 @@ class AgentSearchViewActivity : AppCompatActivity() {
     private fun initUI() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                if(query != null) {
-                    agentviewmodel.onCreate(query.orEmpty())
-                } else {
-                    //Toast.makeText(this, "Error al introducir un agente", Toast.LENGTH_SHORT).show()
-                }
+                agentviewmodel.onCreate(query.orEmpty())
 
                 return false
             }
@@ -66,8 +62,10 @@ class AgentSearchViewActivity : AppCompatActivity() {
             if (it != null) {
                 adapter.updateAdapter(it)
             } else {
-                Toast.makeText(this, "El agente introducido no existe", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "El agente introducido no existe", Toast.LENGTH_LONG).show()
+                adapter.clearAdapter()
             }
+
         })
     }
 

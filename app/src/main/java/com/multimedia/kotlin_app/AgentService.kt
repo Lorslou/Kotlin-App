@@ -22,32 +22,32 @@ class AgentService @Inject constructor(
     private val apiClient: ValorantApiClient
 ) {
 
-    suspend fun getAgent(agentID: String): AgentDataDisplay {
+    suspend fun getAgent(agentID: String): AgentDataDisplay? {
         return withContext(Dispatchers.IO) {
             val response = apiClient.getAgentId(agentID)
 
-            if (response.isSuccessful && response.body() != null) {
-                Log.i("lorena", "funciona :)")
-                Log.i("lorena", response.toString())
-                val agentFound: AgentDataDisplay = response.body()!!.data
-                Log.i("lorena", agentFound.toString())
+            if (response.isSuccessful) {
+                val agentFound: AgentDataDisplay? = response.body()?.data
                 agentFound
             } else {
-                Log.i("lorena", "NO funciona :)")
-                throw AgentNotFoundException()
+                //Log.d("AGENT_VIEW_MODEL", response.body().toString())
+                null
+                //throw AgentNotFoundException()
             }
         }
     }
 
-
-    /*
-    suspend fun getAllAgents(): Agent {
+    suspend fun getAllAgents(): Agent? {
         return withContext(Dispatchers.IO) {
             val response = apiClient.getAgents()
-            response.body()
+            if (response.isSuccessful) {
+                response.body()
+            } else {
+                null
+            }
+
         }
     }
-     */
 
 
 

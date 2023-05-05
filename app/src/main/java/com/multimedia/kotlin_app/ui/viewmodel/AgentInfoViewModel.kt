@@ -23,14 +23,13 @@ class AgentInfoViewModel @Inject constructor(
 
     fun switchFavoriteAgent(agentID: String) {
         viewModelScope.launch  {
-            //TODO CON EL REPLACE NO CRASHEA
             val agentFav = repository.getAgentFromFavorites(agentID) //comprueba si el agente ya está en la tabla de favoritos
             if (agentFav == null) { // Si devuelve null, el agente no está en favoritos, lo insertamos
                 val agentData = repository.getAgentById(agentID)
                 val newAgentFav = AgentEntityFavs(
-                    agentData.uuid,
-                    agentData.agentName,
-                    agentData.agentIcon,
+                    agentData?.uuid.orEmpty(),
+                    agentData?.agentName.orEmpty(),
+                    agentData?.agentIcon.orEmpty(),
                     true
                 )
                 repository.addAgentToFavorites(newAgentFav)
