@@ -17,7 +17,7 @@
         android:theme="@style/Theme.KotlinApp"
         tools:targetApi="31">
         <activity
-            android:name=".ui.view.WelcomeActivity"
+            android:name=".ui.view.home.WelcomeActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

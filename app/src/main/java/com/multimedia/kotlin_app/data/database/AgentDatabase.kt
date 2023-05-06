@@ -6,10 +6,13 @@ import androidx.room.TypeConverters
 import com.multimedia.kotlin_app.AgentAbilitiesConverter
 import com.multimedia.kotlin_app.AgentRoleConverter
 import com.multimedia.kotlin_app.data.database.dao.AgentDao
-import com.multimedia.kotlin_app.data.database.entities.*
+import com.multimedia.kotlin_app.data.database.entities.AgentAbilitiesEntity
+import com.multimedia.kotlin_app.data.database.entities.AgentEntity
+import com.multimedia.kotlin_app.data.database.entities.AgentEntityFavs
+import com.multimedia.kotlin_app.data.database.entities.AgentRoleEntity
 
 @Database(
-    entities = [AgentEntity::class, AgentAbilitiesEntity::class, AgentRoleEntity::class, AgentEntityFavs::class, AllAgentsEntity::class],
+    entities = [AgentEntity::class, AgentAbilitiesEntity::class, AgentRoleEntity::class, AgentEntityFavs::class],
     version = 1
 )
 @TypeConverters(AgentRoleConverter::class, AgentAbilitiesConverter::class)

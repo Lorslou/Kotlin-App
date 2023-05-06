@@ -1,11 +1,13 @@
 package com.multimedia.kotlin_app.data
 
+import com.multimedia.kotlin_app.domain.model.AgentDomain
 import com.multimedia.kotlin_app.AgentService
 import com.multimedia.kotlin_app.data.database.dao.AgentDao
+import com.multimedia.kotlin_app.data.database.entities.AgentEntity
 import com.multimedia.kotlin_app.data.database.entities.AgentEntityFavs
-import com.multimedia.kotlin_app.data.database.entities.AllAgentsEntity
 import com.multimedia.kotlin_app.data.model.Agent
 import com.multimedia.kotlin_app.data.model.AgentDataDisplay
+import com.multimedia.kotlin_app.domain.model.toDomain
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -22,7 +24,8 @@ class AgentRepository @Inject constructor(
     }
 
     suspend fun getAllAgents(): Agent? {
-        return api.getAllAgents()
+        val service = api.getAllAgents()
+        return service
     }
 
     suspend fun getAgentFromFavorites(agentID: String): AgentEntityFavs? {
@@ -47,10 +50,6 @@ class AgentRepository @Inject constructor(
 
     suspend fun deleteAgentFromFavorites(agent: AgentEntityFavs) {
         agentDao.deleteFavoriteAgent(agent)
-    }
-
-    suspend fun addAgentsToDb(agents: AllAgentsEntity) {
-        agentDao.insertAllAgents(agents)
     }
 
 

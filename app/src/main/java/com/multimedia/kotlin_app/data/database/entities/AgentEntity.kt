@@ -40,11 +40,11 @@ data class AgentEntityFavs(
 )
 
 @Entity(tableName = "agent_info_table")
-data class AllAgentsEntity(
+data class AgentToSearch(
     @PrimaryKey @ColumnInfo(name = "uuid") val uuid: String,
     @ColumnInfo(name = "agentName") val agentName: String,
+    @ColumnInfo(name = "agentDescription") val agentDescription: String
 )
-
 
 /*
 fun AgentDomain.toDatabase() = AgentEntity(

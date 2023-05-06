@@ -3,11 +3,15 @@ package com.multimedia.kotlin_app
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.multimedia.kotlin_app.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,6 +21,12 @@ class MainActivity : AppCompatActivity() {
         fragmentListener()
     }
 
+    private fun fragmentListener() {
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.frag_host_container) as NavHostFragment
+        navController = navHostFragment.navController
+        binding.bottomNavigationView.setupWithNavController(navController)
+    }
+
     private fun linkFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
@@ -24,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
+    /*
     private fun fragmentListener() {
         binding.bottomNavigationView.setOnItemReselectedListener {
             when(it.itemId) {
@@ -33,5 +44,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+     */
+
+
 
 }

@@ -37,7 +37,13 @@ class AgentSearchViewModel @Inject constructor(
         }
     }
 
-
+    /*
+    fun searchName(agentName: String) {
+        viewModelScope.launch {
+            val allAgents = getAllAgentsUseCase.invoke()
+        }
+    }
+     */
 
 
 

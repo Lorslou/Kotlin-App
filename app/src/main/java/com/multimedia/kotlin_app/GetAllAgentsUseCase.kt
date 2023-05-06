@@ -9,5 +9,5 @@ class GetAllAgentsUseCase @Inject constructor(
     private val repository: AgentRepository
 ) {
 
-    suspend operator fun invoke(): AgentDataDisplay? = repository.getAllAgents()
+    suspend operator fun invoke(): Agent? = repository.getAllAgents()
 }

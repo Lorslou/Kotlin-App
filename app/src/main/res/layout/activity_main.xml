@@ -8,6 +8,7 @@
 
     <!-- app:navGraph="" -->
     <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/frag_host_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
@@ -15,6 +16,7 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         app:layout_constraintStart_toStartOf="parent"
         app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <FrameLayout
