@@ -1,20 +1,17 @@
-package com.multimedia.kotlin_app.ui.view
+package com.multimedia.kotlin_app.ui.view.search
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.room.util.query
-import com.multimedia.kotlin_app.R
 import com.multimedia.kotlin_app.ui.viewmodel.AgentSearchViewModel
 import com.multimedia.kotlin_app.databinding.ActivityAgentSearchViewBinding
+import com.multimedia.kotlin_app.ui.view.AgentInfoViewActivity
 import com.multimedia.kotlin_app.ui.view.AgentInfoViewActivity.Companion.AGENT_UUID
 import com.multimedia.kotlin_app.ui.view.favorites.ShowFavoritesActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,6 +42,7 @@ class AgentSearchViewActivity : AppCompatActivity() {
             }
             override fun onQueryTextChange(newText: String?) = false //esta fun se llama cada vez que escribamos
         })
+
 
         adapter = AgentAdapter { agentID -> accessToAgentInfo(agentID) }
         binding.rvAgent.setHasFixedSize(true)

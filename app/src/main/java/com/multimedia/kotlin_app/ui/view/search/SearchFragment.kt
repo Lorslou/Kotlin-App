@@ -1,0 +1,109 @@
+package com.multimedia.kotlin_app.ui.view.search
+
+import android.content.Intent
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.multimedia.kotlin_app.databinding.FragmentSearchBinding
+import com.multimedia.kotlin_app.ui.view.AgentInfoViewActivity
+import com.multimedia.kotlin_app.ui.view.favorites.ShowFavoritesFragment
+import com.multimedia.kotlin_app.ui.viewmodel.AgentSearchViewModel
+import dagger.hilt.android.AndroidEntryPoint
+
+
+@AndroidEntryPoint
+class SearchFragment : Fragment() {
+
+    private val searchViewModel by viewModels<AgentSearchViewModel>()
+
+    private var _binding: FragmentSearchBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var adapter: AgentAdapter
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setupObservers()
+        initUI()
+    }
+
+    private fun setupObservers() {
+        searchViewModel.dataLoading.observe(viewLifecycleOwner) {
+            binding.progressBar.isVisible = it
+        }
+
+        searchViewModel.agentDisplay.observe(viewLifecycleOwner) {
+            if (it != null) {
+                adapter.updateAdapter(it)
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "El agente introducido no existe",
+                    Toast.LENGTH_LONG
+                ).show()
+                adapter.clearAdapter()
+            }
+        }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentSearchBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    private fun initUI() {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                searchViewModel.onCreate(query.orEmpty())
+
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?) =
+                false //esta fun se llama cada vez que escribamos
+        })
+
+        adapter = AgentAdapter { agentID -> accessToAgentInfo(agentID) }
+        binding.rvAgent.setHasFixedSize(true)
+        binding.rvAgent.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvAgent.adapter = adapter
+        binding.btnToFavorites.setOnClickListener { accessToFavorites() }
+    }
+
+    //los fragment no tienen contexto, por lo tanto no podemos poner this cuando pide context. Pondremos requireContext()
+    private fun accessToFavorites() {
+        val intent = Intent(requireContext(), ShowFavoritesFragment::class.java) //TODO ENLAZAR AL FRAGMENT DE FAVORITOS
+        startActivity(intent)
+    }
+
+    private fun accessToAgentInfo(agentID: String) {
+        val intent = Intent(requireContext(), AgentInfoViewActivity::class.java)
+        intent.putExtra(AgentInfoViewActivity.AGENT_UUID, agentID)
+        startActivity(intent)
+    }
+
+    /*
+    Se anula la referencia _binding al objeto Binding, estableciéndola en null. Esto asegura que cualquier referencia
+    a las vistas del layout en el fragmento se elimina correctamente y se libera la memoria asociada con el layout.
+    garantiza que la referencia a las vistas se libere en el momento adecuado, ya que el fragmento
+    aún puede estar en memoria después de que su vista haya sido destruida
+     */
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+
+
+
+}

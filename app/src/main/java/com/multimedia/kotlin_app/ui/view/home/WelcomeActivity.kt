@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.multimedia.kotlin_app.databinding.ActivityWelcomeBinding
-import com.multimedia.kotlin_app.ui.view.AgentSearchViewActivity
+import com.multimedia.kotlin_app.ui.view.search.AgentSearchViewActivity
 
 class WelcomeActivity : AppCompatActivity() {
 

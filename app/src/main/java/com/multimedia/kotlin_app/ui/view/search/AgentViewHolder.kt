@@ -1,4 +1,4 @@
-package com.multimedia.kotlin_app.ui.view
+package com.multimedia.kotlin_app.ui.view.search
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

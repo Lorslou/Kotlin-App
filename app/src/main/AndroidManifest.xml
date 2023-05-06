@@ -29,7 +29,7 @@
             android:name=".ui.view.AgentInfoViewActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.view.AgentSearchViewActivity"
+            android:name=".ui.view.search.AgentSearchViewActivity"
             android:exported="false" />
         <activity
             android:name=".SplashScreenActivity"
