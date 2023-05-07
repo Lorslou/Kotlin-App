@@ -5,20 +5,34 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.multimedia.kotlin_app.data.AgentRepository
 import com.multimedia.kotlin_app.data.database.entities.AgentEntityFavs
+import com.multimedia.kotlin_app.data.model.Agent
+import com.multimedia.kotlin_app.data.model.AgentDataDisplay
+import com.multimedia.kotlin_app.domain.uc.GetSpecificAgentUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AgentInfoViewModel @Inject constructor(
-    private val repository: AgentRepository
+    private val repository: AgentRepository,
+    private val getSpecificAgentUseCase: GetSpecificAgentUseCase
 ) : ViewModel() {
 
     val favOnOff = MutableLiveData<Boolean>()
-    val favoriteAgents = MutableLiveData<List<AgentEntityFavs>>()
+    val agentData = MutableLiveData<AgentDataDisplay?>()
 
     fun onCreate(agentID: String) {
-        switchFavoriteAgent(agentID)
+        viewModelScope.launch {
+            val searchResult = getSpecificAgentUseCase.invoke(agentID)
+            agentData.postValue(searchResult)
+            val agentFav = repository.getAgentFromFavorites(agentID)
+            if (agentFav == null) {
+                favOnOff.postValue(false)
+            } else {
+                favOnOff.postValue(true)
+            }
+        }
+
     }
 
     fun switchFavoriteAgent(agentID: String) {
@@ -32,12 +46,14 @@ class AgentInfoViewModel @Inject constructor(
                     agentData?.agentIcon.orEmpty(),
                     true
                 )
+                favOnOff.postValue(true)
                 repository.addAgentToFavorites(newAgentFav)
             } else {
                 // El agente ya está en favoritos, actualizamos el campo isFavorite
                 agentFav.isFavorite = !agentFav.isFavorite
                 if (!agentFav.isFavorite) { //si isFavorite está en false
                     repository.deleteAgentFromFavorites(agentFav)
+                    favOnOff.postValue(false)
                 } else { //el agente es favorito, actualiza los datos en la tabla de favs
                     repository.updateAgent(agentFav)
                 }

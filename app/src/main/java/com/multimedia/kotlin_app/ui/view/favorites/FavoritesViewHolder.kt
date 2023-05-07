@@ -10,8 +10,9 @@ class FavoritesViewHolder (view: View) : RecyclerView.ViewHolder(view) {
 
     private val binding = ItemAgentBinding.bind(view)
 
-    fun render(agentFav: AgentEntityFavs) {
+    fun render(agentFav: AgentEntityFavs, accessToAgentInfo: (String) -> Unit) {
         binding.tvAgentName.text = agentFav.agentName
         binding.ivAgent.load(agentFav.agentIcon)
+        binding.root.setOnClickListener { accessToAgentInfo(agentFav.uuid) }
     }
 }

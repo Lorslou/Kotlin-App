@@ -29,13 +29,14 @@ class ShowFavoritesActivity : AppCompatActivity() {
         binding = ActivityShowFavoritesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupObservers()
-        initUI()
+        //setupObservers()
+        //initUI()
 
         //val agentDatabase = favoritesViewModel.onCreate()
         //Log.i("db", agentDatabase.toString())
     }
 
+    /*
     private fun initUI() {
         favoritesViewModel.onCreate()
         adapter = FavoritesAdapter()
@@ -53,5 +54,7 @@ class ShowFavoritesActivity : AppCompatActivity() {
             }
         })
     }
+     */
+
 
 }

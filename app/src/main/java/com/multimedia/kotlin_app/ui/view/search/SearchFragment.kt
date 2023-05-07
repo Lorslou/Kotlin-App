@@ -8,12 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
+import androidx.navigation.NavDeepLinkBuilder
+import androidx.navigation.NavDirections
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.multimedia.kotlin_app.databinding.FragmentSearchBinding
+import com.multimedia.kotlin_app.ui.view.detail.AgentInfoFragment
+import androidx.navigation.fragment.findNavController
+import com.multimedia.kotlin_app.R
 import com.multimedia.kotlin_app.ui.view.AgentInfoViewActivity
-import com.multimedia.kotlin_app.ui.view.favorites.ShowFavoritesFragment
 import com.multimedia.kotlin_app.ui.viewmodel.AgentSearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,24 +40,6 @@ class SearchFragment : Fragment() {
         initUI()
     }
 
-    private fun setupObservers() {
-        searchViewModel.dataLoading.observe(viewLifecycleOwner) {
-            binding.progressBar.isVisible = it
-        }
-
-        searchViewModel.agentDisplay.observe(viewLifecycleOwner) {
-            if (it != null) {
-                adapter.updateAdapter(it)
-            } else {
-                Toast.makeText(
-                    requireContext(),
-                    "El agente introducido no existe",
-                    Toast.LENGTH_LONG
-                ).show()
-                adapter.clearAdapter()
-            }
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -77,14 +65,28 @@ class SearchFragment : Fragment() {
         binding.rvAgent.setHasFixedSize(true)
         binding.rvAgent.layoutManager = LinearLayoutManager(requireContext())
         binding.rvAgent.adapter = adapter
-        binding.btnToFavorites.setOnClickListener { accessToFavorites() }
+    }
+
+    private fun setupObservers() {
+        searchViewModel.dataLoading.observe(viewLifecycleOwner) {
+            binding.progressBar.isVisible = it
+        }
+
+        searchViewModel.agentDisplay.observe(viewLifecycleOwner) {
+            if (it != null) {
+                adapter.updateAdapter(it)
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "El agente introducido no existe",
+                    Toast.LENGTH_LONG
+                ).show()
+                adapter.clearAdapter()
+            }
+        }
     }
 
     //los fragment no tienen contexto, por lo tanto no podemos poner this cuando pide context. Pondremos requireContext()
-    private fun accessToFavorites() {
-        val intent = Intent(requireContext(), ShowFavoritesFragment::class.java) //TODO ENLAZAR AL FRAGMENT DE FAVORITOS
-        startActivity(intent)
-    }
 
     private fun accessToAgentInfo(agentID: String) {
         val intent = Intent(requireContext(), AgentInfoViewActivity::class.java)
@@ -102,6 +104,24 @@ class SearchFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
+    /*
+    private fun accessToAgentInfo(agentID: String) {
+        val bundle = Bundle()
+        bundle.putString(AgentInfoFragment.AGENT_UUID, agentID)
+
+        val agentInfoFragment = AgentInfoFragment()
+        agentInfoFragment.arguments = bundle
+
+        val fragmentManager = requireActivity().supportFragmentManager
+        fragmentManager.beginTransaction()
+            .replace(R.id.container_fragment_Search, agentInfoFragment).addToBackStack(null).commit()
+
+    }
+     */
+
+
 
 
 

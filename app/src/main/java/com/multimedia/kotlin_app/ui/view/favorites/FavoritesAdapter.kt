@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.multimedia.kotlin_app.R
 import com.multimedia.kotlin_app.data.database.entities.AgentEntityFavs
 
-class FavoritesAdapter : RecyclerView.Adapter<FavoritesViewHolder>() {
+class FavoritesAdapter (private val accessToAgentInfo: (String) -> Unit) : RecyclerView.Adapter<FavoritesViewHolder>() {
     private var favAgentsList: List<AgentEntityFavs> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesViewHolder {
@@ -16,7 +16,7 @@ class FavoritesAdapter : RecyclerView.Adapter<FavoritesViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: FavoritesViewHolder, position: Int) {
-        holder.render(favAgentsList[position])
+        holder.render(favAgentsList[position], accessToAgentInfo)
     }
 
     override fun getItemCount() = favAgentsList.size
@@ -26,6 +26,8 @@ class FavoritesAdapter : RecyclerView.Adapter<FavoritesViewHolder>() {
         favAgentsList = list
         notifyDataSetChanged()
     }
+
+
 
 
 }

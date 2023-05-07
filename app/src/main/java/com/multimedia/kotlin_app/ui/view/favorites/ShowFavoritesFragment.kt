@@ -1,5 +1,6 @@
 package com.multimedia.kotlin_app.ui.view.favorites
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.multimedia.kotlin_app.R
 import com.multimedia.kotlin_app.databinding.FragmentSearchBinding
 import com.multimedia.kotlin_app.databinding.FragmentShowFavoritesBinding
+import com.multimedia.kotlin_app.ui.view.AgentInfoViewActivity
 import com.multimedia.kotlin_app.ui.viewmodel.AgentSearchViewModel
 import com.multimedia.kotlin_app.ui.viewmodel.FavoritesViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,7 +45,7 @@ class ShowFavoritesFragment : Fragment() {
 
     private fun initUI() {
         favoritesViewModel.onCreate()
-        adapter = FavoritesAdapter()
+        adapter = FavoritesAdapter {agentID -> accessToAgentInfo(agentID)}
         binding.rvAgent.setHasFixedSize(true)
         binding.rvAgent.layoutManager = LinearLayoutManager(requireContext())
         binding.rvAgent.adapter = adapter
@@ -58,6 +60,12 @@ class ShowFavoritesFragment : Fragment() {
                     .show()
             }
         })
+    }
+
+    private fun accessToAgentInfo(agentID: String) {
+        val intent = Intent(requireContext(), AgentInfoViewActivity::class.java)
+        intent.putExtra(AgentInfoViewActivity.AGENT_UUID, agentID)
+        startActivity(intent)
     }
 
     override fun onDestroyView() {

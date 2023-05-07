@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- app:navGraph="" -->
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/frag_host_container"
         android:layout_width="0dp"

@@ -9,7 +9,11 @@
         android:id="@+id/searchFragment"
         android:name="com.multimedia.kotlin_app.ui.view.search.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_agentInfoFragment"
+            app:destination="@id/agentInfoFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/homeFragment"
@@ -22,4 +26,16 @@
         android:name="com.multimedia.kotlin_app.ui.view.favorites.ShowFavoritesFragment"
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_show_favorites" />
+
+    <fragment
+        android:id="@+id/agentInfoFragment"
+        android:name="com.multimedia.kotlin_app.ui.view.detail.AgentInfoFragment"
+        android:label="fragment_agent_info"
+        tools:layout="@layout/fragment_agent_info">
+        <argument
+            android:name="agentID"
+            app:argType="string" />
+    </fragment>
+
+
 </navigation>
