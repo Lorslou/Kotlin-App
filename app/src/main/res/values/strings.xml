@@ -15,4 +15,17 @@
     <!-- SEARCH VIEW -->
     <string name="search_query">Search agent</string>
 
+    <!-- FAVORITES VIEW -->
+    <string name="favorites_title">my favorite</string>
+    <string name="favorites_subtitle">agents</string>
+
+    <!-- INFO AGENT VIEW -->
+    <string name="title_role">Role:</string>
+    <string name="title_description">Description:</string>
+    <string name="title_abilities">Abilities:</string>
+
+
+
+
+
 </resources>
