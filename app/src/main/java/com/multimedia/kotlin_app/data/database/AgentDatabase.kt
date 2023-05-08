@@ -3,8 +3,8 @@ package com.multimedia.kotlin_app.data.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.multimedia.kotlin_app.AgentAbilitiesConverter
-import com.multimedia.kotlin_app.AgentRoleConverter
+import com.multimedia.kotlin_app.data.database.converters.AgentAbilitiesConverter
+import com.multimedia.kotlin_app.data.database.converters.AgentRoleConverter
 import com.multimedia.kotlin_app.data.database.dao.AgentDao
 import com.multimedia.kotlin_app.data.database.entities.AgentAbilitiesEntity
 import com.multimedia.kotlin_app.data.database.entities.AgentEntity

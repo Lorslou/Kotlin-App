@@ -1,4 +1,4 @@
-package com.multimedia.kotlin_app
+package com.multimedia.kotlin_app.domain.uc
 
 import com.multimedia.kotlin_app.data.AgentRepository
 import com.multimedia.kotlin_app.data.model.Agent

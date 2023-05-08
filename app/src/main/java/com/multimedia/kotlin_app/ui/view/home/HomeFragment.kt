@@ -42,3 +42,36 @@ class HomeFragment : Fragment() {
             }
     }
 }
+
+/*
+@AndroidEntryPoint
+class HomeFragment : Fragment() {
+
+    private lateinit var binding: FragmentHomeBinding
+
+    private val imageResources = arrayOf(
+        R.drawable.home_image,
+        R.drawable.home_image2,
+        R.drawable.home_image3,
+        R.drawable.home_image4,
+        R.drawable.home_image5
+    )
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        binding.ivHomeImage.setImageResource(imageResources[0])
+        return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val randomNumber = (imageResources.indices).random()
+        binding.ivHomeImage.setImageResource(imageResources[randomNumber])
+    }
+
+}
+ */

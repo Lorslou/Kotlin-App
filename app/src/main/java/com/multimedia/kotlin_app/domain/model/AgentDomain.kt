@@ -4,8 +4,6 @@ import com.multimedia.kotlin_app.data.database.entities.AgentEntity
 import com.multimedia.kotlin_app.data.model.AgentDataDisplay
 import com.multimedia.kotlin_app.data.model.AgentAbilities
 
-//AgentDomain es el tipo de dato devuelto por la API, pues Agent es una entidad de dominio que representa
-// un agente en la lógica de la aplicación
 data class AgentDomain(
     val uuid: String,
     val agentName: String,

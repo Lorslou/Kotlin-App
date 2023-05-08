@@ -92,6 +92,7 @@ class SearchFragment : Fragment() {
         val intent = Intent(requireContext(), AgentInfoViewActivity::class.java)
         intent.putExtra(AgentInfoViewActivity.AGENT_UUID, agentID)
         startActivity(intent)
+
     }
 
     /*

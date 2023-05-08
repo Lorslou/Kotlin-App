@@ -17,5 +17,6 @@
     <!-- COLORES OFICIALES APP -->
     <color name="background_app">#1E1F21</color>
     <color name="red_emphasis">#FF4654</color>
+    <color name="red_transparent">#4AFF4654</color>
 
 </resources>

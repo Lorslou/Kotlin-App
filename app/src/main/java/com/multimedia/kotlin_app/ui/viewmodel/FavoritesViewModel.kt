@@ -3,8 +3,7 @@ package com.multimedia.kotlin_app.ui.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.multimedia.kotlin_app.GetAllFavoriteAgentsUseCase
-import com.multimedia.kotlin_app.data.AgentRepository
+import com.multimedia.kotlin_app.domain.uc.GetAllFavoriteAgentsUseCase
 import com.multimedia.kotlin_app.data.database.entities.AgentEntityFavs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -20,9 +19,7 @@ class FavoritesViewModel @Inject constructor(
 
     fun onCreate() {
         viewModelScope.launch {
-            //TODO AÑADIR PROGRESSBAR
             val searchResult = getFavoriteAgents.invoke()
-
             favoriteAgents.postValue(searchResult)
         }
     }

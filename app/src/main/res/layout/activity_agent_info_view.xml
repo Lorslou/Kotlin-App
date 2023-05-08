@@ -52,7 +52,7 @@
                 android:textColor="@color/black"
                 android:textSize="30sp"
                 android:textStyle="bold"
-                tools:text="AGENTE" />
+                tools:text="AGENT" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/btn_favorites"
@@ -96,7 +96,7 @@
                     android:layout_weight="1"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:text="Initiator"
+                    tools:text="Initiator"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
@@ -127,7 +127,7 @@
                     android:layout_weight="1"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:text="Initiator"
+                    tools:text="Initiator"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
@@ -149,7 +149,7 @@
                     android:layout_weight="1"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:text="Initiator"
+                    tools:text="Initiator"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
@@ -181,7 +181,7 @@
                     android:layout_weight="1"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:text="Initiator"
+                    tools:text="Initiator"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
@@ -203,7 +203,7 @@
                     android:layout_weight="1"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:text="Initiator"
+                    tools:text="Initiator"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 

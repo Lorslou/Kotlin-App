@@ -4,13 +4,13 @@
     <item
         android:id="@+id/searchFragment"
         android:icon="@drawable/ic_navbar_search"
-        android:title=".Search" />
+        android:title="@string/navbar_search" />
     <item
         android:id="@+id/homeFragment"
         android:icon="@drawable/ic_navbar_home"
-        android:title=".Home" />
+        android:title="@string/navbar_home" />
     <item
         android:id="@+id/favoritesFragment"
         android:icon="@drawable/ic_favoriteon"
-        android:title=".Favorites" />
+        android:title="@string/navbar_favorites" />
 </menu>

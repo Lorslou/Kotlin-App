@@ -1,10 +1,10 @@
-package com.multimedia.kotlin_app
+package com.multimedia.kotlin_app.ui.view
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.multimedia.kotlin_app.ui.view.home.WelcomeActivity
+import com.multimedia.kotlin_app.MainActivity
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {

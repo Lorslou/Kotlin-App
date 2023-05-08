@@ -2,4 +2,14 @@
     <string name="app_name">Kotlin-App</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- NAVBAR -->
+    <string name="navbar_home">Home</string>
+    <string name="navbar_search">Search</string>
+    <string name="navbar_favorites">Favorites</string>
+
+    <!-- WELCOME VIEW -->
+    <string name="welcome">welcome</string>
+    <string name="agent">agent</string>
+
 </resources>

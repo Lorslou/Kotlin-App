@@ -1,4 +1,4 @@
-package com.multimedia.kotlin_app
+package com.multimedia.kotlin_app.data.database.converters
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
