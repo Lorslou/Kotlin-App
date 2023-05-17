@@ -47,6 +47,9 @@ dependencies {
 
     //FRAGMENT
     implementation "androidx.fragment:fragment-ktx:1.5.7"
+    //NAVIGATION FRAGMENT
+    implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
+    implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
     //ACTIVITY
     implementation "androidx.activity:activity-ktx:1.7.1"
     //VIEWMODEL

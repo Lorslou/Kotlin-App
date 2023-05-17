@@ -19,6 +19,7 @@ data class AgentDataDisplay(
 )
 
 data class AgentRole(
+    @SerializedName("uuid") val roleUuid: String,
     @SerializedName("displayIcon") val agentRoleIcon: String,
     @SerializedName("displayName") val agentRoleName: String
 )

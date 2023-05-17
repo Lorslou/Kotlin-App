@@ -1,30 +1,41 @@
 package com.multimedia.kotlin_app.data.network
 
 import com.multimedia.kotlin_app.data.model.Agent
-import com.multimedia.kotlin_app.modules.NetworkModule
+import com.multimedia.kotlin_app.data.model.AgentDataDisplay
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-/*
- * Clase que nos permite acceder a los agentes a través de internet (no en db local)
- * y si lo va a hacer a través de internet, lo hará mediante esta clase, todas las llamadas serán
- * desde esta class
- */
-class AgentService @Inject constructor(private val api:ValorantApiClient){
+class AgentService @Inject constructor(
+    private val apiClient: ValorantApiClient
+) {
 
-    suspend fun getAgentByID(agentID: String): Agent? {
+    suspend fun getAgent(agentID: String): AgentDataDisplay? {
         return withContext(Dispatchers.IO) {
-            val service = api.getAgentId(agentID)
-            service.body() ?: api.getAgents().body()?.firstOrNull()
+            val response = apiClient.getAgentId(agentID)
+
+            if (response.isSuccessful) {
+                val agentFound: AgentDataDisplay? = response.body()?.data
+                agentFound
+            } else {
+                null
+            }
         }
     }
 
-    //método que devuelve lista de agentes
-    suspend fun getAllAgents(): List<Agent> {
+    suspend fun getAllAgents(): Agent? {
         return withContext(Dispatchers.IO) {
-            val service = api.getAgents()
-            service.body() ?: emptyList()
+            val response = apiClient.getAgents()
+            if (response.isSuccessful) {
+                response.body()
+            } else {
+                null
+            }
+
         }
     }
+
+
+
 }
+

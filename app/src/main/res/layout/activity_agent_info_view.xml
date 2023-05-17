@@ -16,6 +16,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_favorites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_favoriteoff"
+        app:layout_constraintBottom_toBottomOf="@+id/ivAgentImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.053" />
+
     <ImageView
         android:id="@+id/ivAgentImage"
         android:layout_width="match_parent"
@@ -32,34 +44,67 @@
         app:cardBackgroundColor="@color/card_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
             <TextView
                 android:id="@+id/tvAgentName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/card1"
+                android:background="@color/red_emphasis"
+                android:fontFamily="@font/tungsten_bold"
                 android:gravity="center_horizontal"
-                android:textColor="@color/black"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                tools:text="AGENTE" />
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="40sp"
+                tools:text="AGENT" />
+
 
             <TextView
+                android:id="@+id/tv_title_description"
+                android:layout_width="match_parent"
+                android:textStyle="bold"
+                android:textColor="@color/black"
                 android:layout_marginTop="12dp"
+                android:layout_marginHorizontal="12dp"
+                android:text="@string/title_description"
+                android:textSize="19sp"
+
+                android:fontFamily="@font/d_din"
+                android:layout_height="wrap_content"/>
+
+            <TextView
                 android:id="@+id/tvDescription"
                 android:layout_width="match_parent"
+                android:layout_marginHorizontal="12dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/d_din"
                 android:gravity="center_horizontal"
                 android:textColor="@color/black"
-                android:textSize="13sp"
+                android:textSize="14sp"
                 tools:text="Description" />
+
+            <TextView
+                android:id="@+id/tv_title_role"
+                android:layout_width="match_parent"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginHorizontal="12dp"
+                android:text="@string/title_role"
+                android:textSize="19sp"
+                android:fontFamily="@font/d_din"
+                android:layout_height="wrap_content"/>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -71,6 +116,7 @@
                 <ImageView
                     android:id="@+id/ivAgentRoleImage"
                     android:layout_width="40dp"
+                    android:layout_marginTop="10dp"
                     android:layout_height="40dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -79,18 +125,33 @@
                 <TextView
                     android:id="@+id/tvAgentRoleName"
                     android:layout_width="0dp"
+                    android:fontFamily="@font/d_din"
+                    android:textStyle="bold"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="4dp"
-                    android:layout_weight="1"
-                    android:layout_marginStart="9dp"
                     android:layout_gravity="center"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginStart="9dp"
+                    android:layout_weight="1"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:text="Initiator"
+                    tools:text="Initiator"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="19sp" />
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_title_abilities"
+                android:layout_width="match_parent"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/black"
+                android:layout_marginHorizontal="12dp"
+                android:text="@string/title_abilities"
+                android:textSize="19sp"
+                android:fontFamily="@font/d_din"
+                android:layout_height="wrap_content"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -111,15 +172,17 @@
                     android:id="@+id/tvAbility1Name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="4dp"
-                    android:layout_weight="1"
-                    android:layout_marginStart="9dp"
                     android:layout_gravity="center"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginStart="9dp"
+                    android:fontFamily="@font/d_din"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:text="Initiator"
+                    tools:text="Initiator"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="19sp" />
 
                 <ImageView
                     android:id="@+id/ivAbility2Image"
@@ -132,16 +195,18 @@
                 <TextView
                     android:id="@+id/tvAbility2Name"
                     android:layout_width="0dp"
+                    android:fontFamily="@font/d_din"
+                    android:textStyle="bold"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="4dp"
-                    android:layout_weight="1"
-                    android:layout_marginStart="9dp"
                     android:layout_gravity="center"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginStart="9dp"
+                    android:layout_weight="1"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:text="Initiator"
+                    tools:text="Initiator"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="19sp" />
 
             </LinearLayout>
 
@@ -165,15 +230,17 @@
                     android:id="@+id/tvAbility3Name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="4dp"
-                    android:layout_weight="1"
-                    android:layout_marginStart="9dp"
                     android:layout_gravity="center"
+                    android:fontFamily="@font/d_din"
+                    android:textStyle="bold"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginStart="9dp"
+                    android:layout_weight="1"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:text="Initiator"
+                    tools:text="Initiator"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="19sp" />
 
                 <ImageView
                     android:id="@+id/ivAbility4Image"
@@ -187,15 +254,17 @@
                     android:id="@+id/tvAbility4Name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="4dp"
-                    android:layout_weight="1"
-                    android:layout_marginStart="9dp"
                     android:layout_gravity="center"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginStart="9dp"
+                    android:layout_weight="1"
                     android:maxLines="1"
+                    android:fontFamily="@font/d_din"
+                    android:textStyle="bold"
                     android:singleLine="true"
-                    android:text="Initiator"
+                    tools:text="Initiator"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="19sp" />
 
             </LinearLayout>
 
@@ -203,6 +272,8 @@
 
 
     </androidx.cardview.widget.CardView>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
