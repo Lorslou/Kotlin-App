@@ -4,8 +4,8 @@ import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 /*
- * Clase que permite la generación de código de Hilt, ésta se incorpora al ciclo de vida de Application y le
- * proporciona dependencias, permitiendo que otros componentes puedan acceder a las mismas
+ * Class that enables the generation of Hilt code, it is incorporated into the Application's lifecycle
+ * and provides dependencies, allowing other components to access them.
  */
 @HiltAndroidApp
 class DaggerHiltApp: Application()
