@@ -1,5 +1,6 @@
 package com.multimedia.kotlin_app.ui.view.search
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -71,12 +72,7 @@ class SearchFragment : Fragment() {
             if (it != null) {
                 adapter.updateAdapter(it)
             } else {
-                //TODO --> SWAP TO DIALOG
-                Toast.makeText(
-                    requireContext(),
-                    "El agente introducido no existe",
-                    Toast.LENGTH_LONG
-                ).show()
+                showAlertDialog()
                 adapter.clearAdapter()
             }
         }
@@ -99,6 +95,15 @@ class SearchFragment : Fragment() {
         _binding = null
     }
 
-    //los fragment no tienen contexto, por lo tanto no podemos poner this cuando pide context. Pondremos requireContext()
+    // TODO DELEGATE RESPONSIBILITY TO THE VIEWMODEL
+    private fun showAlertDialog() {
+        val alertDialog = AlertDialog.Builder(requireContext())
+            .setMessage("Try searching something else")
+            .setTitle("Not found")
+            .setPositiveButton(android.R.string.ok, null)
+            .create()
+
+        alertDialog.show()
+    }
 
 }
