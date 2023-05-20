@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.multimedia.kotlin_app.databinding.ActivityMainBinding
@@ -23,10 +24,16 @@ class MainActivity : AppCompatActivity() {
         fragmentListener()
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.frag_host_container)
+        return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+
     private fun fragmentListener() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.frag_host_container) as NavHostFragment
         navController = navHostFragment.navController
         binding.bottomNavigationView.setupWithNavController(navController)
+
     }
 
     private fun linkFragment(fragment: Fragment) {

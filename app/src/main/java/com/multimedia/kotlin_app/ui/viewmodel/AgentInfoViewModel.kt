@@ -3,6 +3,7 @@ package com.multimedia.kotlin_app.ui.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavController
 import com.multimedia.kotlin_app.data.AgentRepository
 import com.multimedia.kotlin_app.data.database.entities.AgentEntityFavs
 import com.multimedia.kotlin_app.data.model.Agent
@@ -20,6 +21,7 @@ class AgentInfoViewModel @Inject constructor(
 
     val favOnOff = MutableLiveData<Boolean>()
     val agentData = MutableLiveData<AgentDataDisplay?>()
+    val goBack = MutableLiveData<Unit>()
 
     fun onCreate(agentID: String) {
         viewModelScope.launch {
@@ -59,6 +61,10 @@ class AgentInfoViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun goBackToSearch() {
+        goBack.postValue(Unit)
     }
 
 }

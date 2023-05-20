@@ -1,6 +1,6 @@
 package com.multimedia.kotlin_app.ui.view.search
 
-import android.content.Intent
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,26 +8,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavController
-import androidx.navigation.NavDeepLinkBuilder
-import androidx.navigation.NavDirections
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.multimedia.kotlin_app.databinding.FragmentSearchBinding
-import com.multimedia.kotlin_app.ui.view.detail.AgentInfoFragment
 import androidx.navigation.fragment.findNavController
 import com.multimedia.kotlin_app.R
-import com.multimedia.kotlin_app.ui.view.AgentInfoViewActivity
 import com.multimedia.kotlin_app.ui.viewmodel.AgentSearchViewModel
+import com.multimedia.kotlin_app.ui.view.detail.AgentInfoFragment.Companion.AGENT_UUID
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
 
-    private val searchViewModel by viewModels<AgentSearchViewModel>()
+    private val searchViewModel: AgentSearchViewModel by viewModels()
 
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
@@ -58,7 +54,7 @@ class SearchFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?) =
-                false //esta fun se llama cada vez que escribamos
+                false
         })
 
         adapter = AgentAdapter { agentID -> accessToAgentInfo(agentID) }
@@ -76,23 +72,16 @@ class SearchFragment : Fragment() {
             if (it != null) {
                 adapter.updateAdapter(it)
             } else {
-                Toast.makeText(
-                    requireContext(),
-                    "El agente introducido no existe",
-                    Toast.LENGTH_LONG
-                ).show()
+                showAlertDialog()
                 adapter.clearAdapter()
             }
         }
     }
 
-    //los fragment no tienen contexto, por lo tanto no podemos poner this cuando pide context. Pondremos requireContext()
-
     private fun accessToAgentInfo(agentID: String) {
-        val intent = Intent(requireContext(), AgentInfoViewActivity::class.java)
-        intent.putExtra(AgentInfoViewActivity.AGENT_UUID, agentID)
-        startActivity(intent)
-
+        val bundle = bundleOf(AGENT_UUID to agentID)
+        val navController = findNavController()
+        navController.navigate(R.id.action_searchFragment_to_agentInfoFragment, bundle)
     }
 
     /*
@@ -106,25 +95,15 @@ class SearchFragment : Fragment() {
         _binding = null
     }
 
+    // TODO DELEGATE RESPONSIBILITY TO THE VIEWMODEL
+    private fun showAlertDialog() {
+        val alertDialog = AlertDialog.Builder(requireContext())
+            .setMessage("Try searching something else")
+            .setTitle("Not found")
+            .setPositiveButton(android.R.string.ok, null)
+            .create()
 
-    /*
-    private fun accessToAgentInfo(agentID: String) {
-        val bundle = Bundle()
-        bundle.putString(AgentInfoFragment.AGENT_UUID, agentID)
-
-        val agentInfoFragment = AgentInfoFragment()
-        agentInfoFragment.arguments = bundle
-
-        val fragmentManager = requireActivity().supportFragmentManager
-        fragmentManager.beginTransaction()
-            .replace(R.id.container_fragment_Search, agentInfoFragment).addToBackStack(null).commit()
-
+        alertDialog.show()
     }
-     */
-
-
-
-
-
 
 }
