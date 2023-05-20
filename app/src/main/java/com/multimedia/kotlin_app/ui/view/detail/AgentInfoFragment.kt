@@ -1,7 +1,6 @@
 package com.multimedia.kotlin_app.ui.view.detail
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,17 +10,10 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import coil.load
 import com.multimedia.kotlin_app.R
-import com.multimedia.kotlin_app.data.model.Agent
 import com.multimedia.kotlin_app.data.model.AgentDataDisplay
-import com.multimedia.kotlin_app.data.network.ValorantApiClient
 import com.multimedia.kotlin_app.databinding.FragmentAgentInfoBinding
-import com.multimedia.kotlin_app.modules.NetworkModule
 import com.multimedia.kotlin_app.ui.viewmodel.AgentInfoViewModel
-import com.multimedia.kotlin_app.ui.viewmodel.AgentSearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AgentInfoFragment : Fragment() {
@@ -31,6 +23,7 @@ class AgentInfoFragment : Fragment() {
     private var _binding: FragmentAgentInfoBinding? = null
     private val binding get() = _binding!!
     private var agentUUID: String? = null
+
 
     companion object {
         const val AGENT_UUID = "agent_uuid"
@@ -71,12 +64,16 @@ class AgentInfoFragment : Fragment() {
         agentViewModel.agentData.observe(viewLifecycleOwner, Observer {
             createUI(it!!)
         })
+
+        agentViewModel.goBack.observe(viewLifecycleOwner, Observer {
+            findNavController().popBackStack()
+        })
     }
 
     private fun createUI(agentData: AgentDataDisplay) {
         bindingShowData(agentData)
         binding.btnFavorites.setOnClickListener { agentViewModel.switchFavoriteAgent(agentData.uuid) }
-
+        binding.ibGoBack.setOnClickListener { agentViewModel.goBackToSearch() }
     }
 
     //TODO SWAP TO RECYCLERVIEW
@@ -96,6 +93,7 @@ class AgentInfoFragment : Fragment() {
         binding.tvAbility3Name.text = agentData.agentAbilities[2].abilitiesName
         binding.tvAbility4Name.text = agentData.agentAbilities[3].abilitiesName
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

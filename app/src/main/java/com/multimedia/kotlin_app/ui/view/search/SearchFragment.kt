@@ -1,6 +1,5 @@
 package com.multimedia.kotlin_app.ui.view.search
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,23 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavController
-import androidx.navigation.NavDeepLinkBuilder
-import androidx.navigation.NavDirections
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.multimedia.kotlin_app.databinding.FragmentSearchBinding
-import com.multimedia.kotlin_app.ui.view.detail.AgentInfoFragment
 import androidx.navigation.fragment.findNavController
 import com.multimedia.kotlin_app.R
-import com.multimedia.kotlin_app.ui.view.AgentInfoViewActivity
 import com.multimedia.kotlin_app.ui.viewmodel.AgentSearchViewModel
-import androidx.fragment.app.FragmentManager
 import com.multimedia.kotlin_app.ui.view.detail.AgentInfoFragment.Companion.AGENT_UUID
-import com.multimedia.kotlin_app.ui.viewmodel.AgentInfoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -109,15 +100,5 @@ class SearchFragment : Fragment() {
     }
 
     //los fragment no tienen contexto, por lo tanto no podemos poner this cuando pide context. Pondremos requireContext()
-
-/*
- private fun accessToAgentInfo(agentID: String) {
-        val bundle = bundleOf(AGENT_UUID to agentID)
-        val agentInfoFragment = AgentInfoFragment()
-        agentInfoFragment.arguments = bundle
-        val navController = findNavController()
-        navController.navigate(R.id.action_searchFragment_to_agentInfoFragment, bundle)
-    }
- */
 
 }
