@@ -5,73 +5,62 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.multimedia.kotlin_app.R
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.multimedia.kotlin_app.databinding.FragmentHomeBinding
+import com.multimedia.kotlin_app.ui.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private val homeViewModel: HomeViewModel by viewModels()
+
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var adapter: HomeAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+    ): View {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setupObservers()
+        initUI()
+    }
+
+    private fun setupObservers() {
+        homeViewModel.agentsDisplay.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                adapter.updateAdapter(it)
+            } else {
+                Toast.makeText(requireContext(), "CAMBIAR TEXTO", Toast.LENGTH_SHORT)
+                    .show()
             }
-    }
-}
-
-/*
-@AndroidEntryPoint
-class HomeFragment : Fragment() {
-
-    private lateinit var binding: FragmentHomeBinding
-
-    private val imageResources = arrayOf(
-        R.drawable.home_image,
-        R.drawable.home_image2,
-        R.drawable.home_image3,
-        R.drawable.home_image4,
-        R.drawable.home_image5
-    )
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
-        binding.ivHomeImage.setImageResource(imageResources[0])
-        return view
+        })
     }
 
-    override fun onResume() {
-        super.onResume()
-        val randomNumber = (imageResources.indices).random()
-        binding.ivHomeImage.setImageResource(imageResources[randomNumber])
+    private fun initUI() {
+        homeViewModel.onCreateFavoritesView()
+        adapter = HomeAdapter()
+        binding.rvAgent.setHasFixedSize(true)
+        binding.rvAgent.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvAgent.adapter = adapter
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 
 }
- */

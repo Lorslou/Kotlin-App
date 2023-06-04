@@ -1,5 +1,7 @@
 package com.multimedia.kotlin_app.ui.viewmodel
 
+import android.app.AlertDialog
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,14 +17,35 @@ import javax.inject.Inject
 class AgentSearchViewModel @Inject constructor(
     private val getSpecificAgentUseCase: GetSpecificAgentUseCase,
     private val getAllAgentsUseCase: GetAllAgentsUseCase
-): ViewModel() {
+) : ViewModel() {
 
-    val agentDisplay = MutableLiveData<AgentDataDisplay?>()
-    val allAgents = MutableLiveData<List<Agent>?>() //mostrar todos los agentes
-    val dataLoading = MutableLiveData<Boolean>() //para el círculo de loading
-    val favOnOff = MutableLiveData<Boolean>() //control fav
+    val allAgents = MutableLiveData<List<AgentDataDisplay>?>()
+    val filteredAgentList = MutableLiveData<List<AgentDataDisplay>?>()
+    val dataLoading = MutableLiveData<Boolean>()
+    val favOnOff = MutableLiveData<Boolean>()
+    val showDialog = MutableLiveData<Unit>()
+
+    fun onCreate(agentName: String) {
+        viewModelScope.launch {
+            dataLoading.postValue(true)
+            val agents = getAllAgentsUseCase.invoke()
+            if (agents != null) {
+                val filteredAgent = agents.filter { agent ->
+                    agent.agentName.contains(
+                        agentName,
+                        ignoreCase = true
+                    )
+                }
+                filteredAgentList.postValue(filteredAgent)
+            } else {
+                filteredAgentList.postValue(null) //para que aparezca el toast
+            }
+            dataLoading.postValue(false)
+        }
+    }
 
 
+/*
     fun onCreate(agentID: String) {
         viewModelScope.launch {
             dataLoading.postValue(true)
@@ -36,5 +59,5 @@ class AgentSearchViewModel @Inject constructor(
 
         }
     }
-
+*/
 }

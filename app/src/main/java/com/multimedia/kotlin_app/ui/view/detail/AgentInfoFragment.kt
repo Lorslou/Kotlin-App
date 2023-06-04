@@ -8,9 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import coil.load
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.multimedia.kotlin_app.R
-import com.multimedia.kotlin_app.data.model.AgentDataDisplay
 import com.multimedia.kotlin_app.databinding.FragmentAgentInfoBinding
 import com.multimedia.kotlin_app.ui.viewmodel.AgentInfoViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,25 +22,20 @@ class AgentInfoFragment : Fragment() {
     private var _binding: FragmentAgentInfoBinding? = null
     private val binding get() = _binding!!
     private var agentUUID: String? = null
+    private lateinit var  adapter: AgentInfoAdapter
 
 
     companion object {
         const val AGENT_UUID = "agent_uuid"
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            agentUUID = it.getString(AGENT_UUID)
-        }
-
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setupObservers()
         agentViewModel.onCreate(agentUUID!!)
+        initUI()
     }
 
     override fun onCreateView(
@@ -50,6 +44,14 @@ class AgentInfoFragment : Fragment() {
     ): View {
         _binding = FragmentAgentInfoBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            agentUUID = it.getString(AGENT_UUID)
+        }
+
     }
 
     private fun setupObservers() {
@@ -61,22 +63,27 @@ class AgentInfoFragment : Fragment() {
             }
         })
 
+
         agentViewModel.agentData.observe(viewLifecycleOwner, Observer {
-            createUI(it!!)
+            adapter.updateAdapter(it!!)
         })
+
 
         agentViewModel.goBack.observe(viewLifecycleOwner, Observer {
             findNavController().popBackStack()
         })
     }
 
-    private fun createUI(agentData: AgentDataDisplay) {
-        bindingShowData(agentData)
-        binding.btnFavorites.setOnClickListener { agentViewModel.switchFavoriteAgent(agentData.uuid) }
+    private fun initUI() {
+        adapter = AgentInfoAdapter()
+        binding.rvAgentDetail.setHasFixedSize(true)
+        binding.rvAgentDetail.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvAgentDetail.adapter = adapter
+        //binding.btnFavorites.setOnClickListener { agentViewModel.switchFavoriteAgent(agentData.uuid) }
         binding.ibGoBack.setOnClickListener { agentViewModel.goBackToSearch() }
     }
 
-    //TODO SWAP TO RECYCLERVIEW
+    /*
     private fun bindingShowData(agentData: AgentDataDisplay) {
         binding.ivBackground.load(agentData.agentBackground)
         binding.ivAgentImage.load(agentData.agentInfoPortrait)
@@ -93,7 +100,7 @@ class AgentInfoFragment : Fragment() {
         binding.tvAbility3Name.text = agentData.agentAbilities[2].abilitiesName
         binding.tvAbility4Name.text = agentData.agentAbilities[3].abilitiesName
     }
-
+*/
 
     override fun onDestroyView() {
         super.onDestroyView()

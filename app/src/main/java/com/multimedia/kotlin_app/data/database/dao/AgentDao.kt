@@ -13,8 +13,12 @@ interface AgentDao {
     @Query("SELECT * FROM agent_favorites_table WHERE uuid = :agentID")
     suspend fun getAgentRequestedByUser(agentID:String): AgentEntityFavs
 
+    /*
     @Query("SELECT * FROM agent_favorites_table WHERE uuid = :agentID")
     suspend fun checkIfAgentFavorite(agentID: String): AgentEntityFavs
+*/
+    @Query("SELECT * FROM agent_favorites_table WHERE agentName = :agentNameUser")
+    suspend fun checkIfAgentFavorite(agentNameUser: String): AgentEntityFavs
 
     @Query("SELECT * FROM agent_data_table ORDER BY agentName DESC")
     suspend fun getAllAgents(): List<AgentEntity>
