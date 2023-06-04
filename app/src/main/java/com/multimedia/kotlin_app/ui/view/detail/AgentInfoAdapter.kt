@@ -9,7 +9,7 @@ import com.multimedia.kotlin_app.ui.view.home.HomeViewHolder
 
 
 class AgentInfoAdapter(
-    private var agentInfo: List<AgentDataDisplay> = emptyList()
+    private var agentInfo: AgentDataDisplay? = null
 ) : RecyclerView.Adapter<AgentInfoViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AgentInfoViewHolder {
@@ -19,19 +19,15 @@ class AgentInfoAdapter(
     }
 
     override fun onBindViewHolder(holder: AgentInfoViewHolder, position: Int) {
-        holder.render(agentInfo[position])
+        agentInfo?.let { holder.render(it) }
     }
 
-    override fun getItemCount() = agentInfo.size
+    override fun getItemCount() = if (agentInfo != null) 1 else 0
 
-    fun updateAdapter(list: List<AgentDataDisplay>) {
-        agentInfo = list
+    fun updateAdapter(agentSearch: AgentDataDisplay) {
+        this.agentInfo = agentSearch
         notifyDataSetChanged()
     }
 
-    fun clearAdapter(){
-        agentInfo = emptyList()
-        notifyDataSetChanged()
-    }
 
 }

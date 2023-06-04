@@ -31,8 +31,9 @@ class AgentInfoViewModel @Inject constructor(
     fun onCreate(agentName: String) {
         viewModelScope.launch {
             val searchResult = getAllAgentsUseCase.invoke()
-            val filteredAgent = searchResult?.find { agent -> agent.agentName == agentName }
-            Log.i("lorena", filteredAgent.toString())
+            val filteredAgent = searchResult?.find { agent ->
+                agent.uuid.equals(agentName.trim(), ignoreCase = true)
+            }
             agentData.postValue(filteredAgent)
             val agentFav = repository.getAgentFromFavorites(agentName)
             if (agentFav == null) {

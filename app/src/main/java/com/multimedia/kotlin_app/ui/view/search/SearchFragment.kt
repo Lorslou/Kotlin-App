@@ -80,6 +80,7 @@ class SearchFragment : Fragment() {
             }
         }
         */
+
         searchViewModel.filteredAgentList.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 adapter.updateAdapter(it)

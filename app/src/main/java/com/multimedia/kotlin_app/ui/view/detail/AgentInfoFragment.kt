@@ -22,7 +22,7 @@ class AgentInfoFragment : Fragment() {
     private var _binding: FragmentAgentInfoBinding? = null
     private val binding get() = _binding!!
     private var agentUUID: String? = null
-    private lateinit var  adapter: AgentInfoAdapter
+    private lateinit var adapter: AgentInfoAdapter
 
 
     companion object {
@@ -65,8 +65,7 @@ class AgentInfoFragment : Fragment() {
 
 
         agentViewModel.agentData.observe(viewLifecycleOwner, Observer {
-
-            adapter.updateAdapter(listOf(it!!))
+            adapter.updateAdapter(it!!)
         })
 
 
