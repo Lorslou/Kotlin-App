@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Agent(
     @SerializedName("status") val status: Int,
-    @SerializedName("data") val data: AgentDataDisplay
+    @SerializedName("data") val data: List<AgentDataDisplay>
 )
 
 data class AgentDataDisplay(

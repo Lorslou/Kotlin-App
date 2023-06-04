@@ -11,12 +11,14 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.multimedia.kotlin_app.databinding.FragmentSearchBinding
 import androidx.navigation.fragment.findNavController
 import com.multimedia.kotlin_app.R
 import com.multimedia.kotlin_app.ui.viewmodel.AgentSearchViewModel
 import com.multimedia.kotlin_app.ui.view.detail.AgentInfoFragment.Companion.AGENT_UUID
+import com.multimedia.kotlin_app.ui.viewmodel.SearchFavoritesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -68,6 +70,7 @@ class SearchFragment : Fragment() {
             binding.progressBar.isVisible = it
         }
 
+        /*
         searchViewModel.agentDisplay.observe(viewLifecycleOwner) {
             if (it != null) {
                 adapter.updateAdapter(it)
@@ -76,6 +79,19 @@ class SearchFragment : Fragment() {
                 adapter.clearAdapter()
             }
         }
+        */
+        searchViewModel.filteredAgentList.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                adapter.updateAdapter(it)
+            } else {
+                showAlertDialog()
+                adapter.clearAdapter()
+            }
+        })
+
+        searchViewModel.showDialog.observe(viewLifecycleOwner, Observer {
+
+        })
     }
 
     private fun accessToAgentInfo(agentID: String) {

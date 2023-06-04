@@ -10,6 +10,7 @@ class AgentService @Inject constructor(
     private val apiClient: ValorantApiClient
 ) {
 
+    /*
     suspend fun getAgent(agentID: String): AgentDataDisplay? {
         return withContext(Dispatchers.IO) {
             val response = apiClient.getAgentId(agentID)
@@ -22,12 +23,14 @@ class AgentService @Inject constructor(
             }
         }
     }
-
-    suspend fun getAllAgents(): Agent? {
+*/
+    suspend fun getAllAgents(): List<AgentDataDisplay>? {
         return withContext(Dispatchers.IO) {
             val response = apiClient.getAgents()
+
             if (response.isSuccessful) {
-                response.body()
+                val agentFound: List<AgentDataDisplay>? = response.body()?.data
+                agentFound
             } else {
                 null
             }
