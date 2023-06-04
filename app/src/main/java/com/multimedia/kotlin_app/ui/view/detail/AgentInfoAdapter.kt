@@ -29,4 +29,9 @@ class AgentInfoAdapter(
         notifyDataSetChanged()
     }
 
+    fun clearAdapter(){
+        agentInfo = emptyList()
+        notifyDataSetChanged()
+    }
+
 }

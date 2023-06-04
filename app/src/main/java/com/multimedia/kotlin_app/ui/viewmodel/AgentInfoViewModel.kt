@@ -1,5 +1,6 @@
 package com.multimedia.kotlin_app.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -22,15 +23,17 @@ class AgentInfoViewModel @Inject constructor(
 ) : ViewModel() {
 
     val favOnOff = MutableLiveData<Boolean>()
-    //val agentData = MutableLiveData<AgentDataDisplay?>()
-    val agentData = MutableLiveData<List<AgentDataDisplay>?>()
+    val agentData = MutableLiveData<AgentDataDisplay?>()
+    //val agentData = MutableLiveData<List<AgentDataDisplay>?>()
     val goBack = MutableLiveData<Unit>()
 
 
     fun onCreate(agentName: String) {
         viewModelScope.launch {
             val searchResult = getAllAgentsUseCase.invoke()
-            agentData.postValue(searchResult)
+            val filteredAgent = searchResult?.find { agent -> agent.agentName == agentName }
+            Log.i("lorena", filteredAgent.toString())
+            agentData.postValue(filteredAgent)
             val agentFav = repository.getAgentFromFavorites(agentName)
             if (agentFav == null) {
                 favOnOff.postValue(false)

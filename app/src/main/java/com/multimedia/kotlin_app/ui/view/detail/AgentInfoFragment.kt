@@ -65,7 +65,8 @@ class AgentInfoFragment : Fragment() {
 
 
         agentViewModel.agentData.observe(viewLifecycleOwner, Observer {
-            adapter.updateAdapter(it!!)
+
+            adapter.updateAdapter(listOf(it!!))
         })
 
 
@@ -82,25 +83,6 @@ class AgentInfoFragment : Fragment() {
         //binding.btnFavorites.setOnClickListener { agentViewModel.switchFavoriteAgent(agentData.uuid) }
         binding.ibGoBack.setOnClickListener { agentViewModel.goBackToSearch() }
     }
-
-    /*
-    private fun bindingShowData(agentData: AgentDataDisplay) {
-        binding.ivBackground.load(agentData.agentBackground)
-        binding.ivAgentImage.load(agentData.agentInfoPortrait)
-        binding.tvAgentName.text = agentData.agentName
-        binding.tvDescription.text = agentData.agentDescription
-        binding.ivAgentRoleImage.load(agentData.agentRole.agentRoleIcon)
-        binding.tvAgentRoleName.text = agentData.agentRole.agentRoleName
-        binding.ivAbility1Image.load(agentData.agentAbilities[0].abilitiesIcon)
-        binding.ivAbility2Image.load(agentData.agentAbilities[1].abilitiesIcon)
-        binding.ivAbility3Image.load(agentData.agentAbilities[2].abilitiesIcon)
-        binding.ivAbility4Image.load(agentData.agentAbilities[3].abilitiesIcon)
-        binding.tvAbility1Name.text = agentData.agentAbilities[0].abilitiesName
-        binding.tvAbility2Name.text = agentData.agentAbilities[1].abilitiesName
-        binding.tvAbility3Name.text = agentData.agentAbilities[2].abilitiesName
-        binding.tvAbility4Name.text = agentData.agentAbilities[3].abilitiesName
-    }
-*/
 
     override fun onDestroyView() {
         super.onDestroyView()

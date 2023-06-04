@@ -28,9 +28,5 @@ class HomeAdapter(
         notifyDataSetChanged()
     }
 
-    fun clearAdapter(){
-        agentList = emptyList()
-        notifyDataSetChanged()
-    }
 
 }
