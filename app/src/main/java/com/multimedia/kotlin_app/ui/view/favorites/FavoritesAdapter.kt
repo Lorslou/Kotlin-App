@@ -6,6 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.multimedia.kotlin_app.R
 import com.multimedia.kotlin_app.data.database.entities.AgentEntityFavs
 
+/**
+ * This is an adapter used to display favorites information in the RecyclerView
+ * of the favorites fragment
+ */
 class FavoritesAdapter(private val accessToAgentInfo: (String) -> Unit) :
     RecyclerView.Adapter<FavoritesViewHolder>() {
     private var favAgentsList: List<AgentEntityFavs> = emptyList()

@@ -7,8 +7,12 @@ import com.multimedia.kotlin_app.data.model.Agent
 import com.multimedia.kotlin_app.data.model.AgentDataDisplay
 import com.multimedia.kotlin_app.databinding.ItemAgentBinding
 
-//El listado del adapter le pasa un item al ViewHolder (AgentDataDisplay)
+/**
+ * This class is responsible for binding the data from AgentDataDisplay to the view elements
+ * in each item of the RecyclerView in the agent list of the search
+ */
 class AgentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    // The adapter's list passes an item to the ViewHolder (AgentDataDisplay)
 
     private val binding = ItemAgentBinding.bind(view)
 

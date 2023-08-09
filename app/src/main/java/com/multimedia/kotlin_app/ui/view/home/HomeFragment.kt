@@ -13,7 +13,10 @@ import com.multimedia.kotlin_app.databinding.FragmentHomeBinding
 import com.multimedia.kotlin_app.ui.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-
+/**
+ * Fragment that displays the interface of the home screen and contains the
+ *  logic of the viewmodel
+ */
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
@@ -43,14 +46,14 @@ class HomeFragment : Fragment() {
             if (it != null) {
                 adapter.updateAdapter(it)
             } else {
-                Toast.makeText(requireContext(), "CAMBIAR TEXTO", Toast.LENGTH_SHORT)
+                Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT)
                     .show()
             }
         })
     }
 
     private fun initUI() {
-        homeViewModel.onCreateFavoritesView()
+        homeViewModel.onCreateHomeView()
         adapter = HomeAdapter()
         binding.rvAgent.setHasFixedSize(true)
         binding.rvAgent.layoutManager = LinearLayoutManager(requireContext())
@@ -61,6 +64,5 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 
 }

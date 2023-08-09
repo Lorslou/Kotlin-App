@@ -14,6 +14,10 @@ import com.multimedia.kotlin_app.databinding.FragmentAgentInfoBinding
 import com.multimedia.kotlin_app.ui.viewmodel.AgentInfoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ *  Fragment that displays the interface of the agent details screen and contains the
+ *  logic of the viewmodel
+ */
 @AndroidEntryPoint
 class AgentInfoFragment : Fragment() {
 
@@ -79,7 +83,7 @@ class AgentInfoFragment : Fragment() {
         binding.rvAgentDetail.setHasFixedSize(true)
         binding.rvAgentDetail.layoutManager = LinearLayoutManager(requireContext())
         binding.rvAgentDetail.adapter = adapter
-        //binding.btnFavorites.setOnClickListener { agentViewModel.switchFavoriteAgent(agentData.uuid) }
+        binding.btnFavorites.setOnClickListener { agentViewModel.switchFavoriteAgent(agentUUID!!) }
         binding.ibGoBack.setOnClickListener { agentViewModel.goBackToSearch() }
     }
 

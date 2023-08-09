@@ -17,7 +17,10 @@ import com.multimedia.kotlin_app.ui.view.detail.AgentInfoFragment
 import com.multimedia.kotlin_app.ui.viewmodel.SearchFavoritesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-
+/**
+ * Fragment that displays the interface of the favorite agents screen and contains the
+ *  logic of the viewmodel
+ */
 @AndroidEntryPoint
 class ShowFavoritesFragment : Fragment() {
 
@@ -66,14 +69,6 @@ class ShowFavoritesFragment : Fragment() {
         val navController = findNavController()
         navController.navigate(R.id.action_favoritesFragment_to_agentInfoFragment, bundle)
     }
-
-    /*
-    private fun accessToAgentInfo(agentID: String) {
-        val intent = Intent(requireContext(), AgentInfoViewActivity::class.java)
-        intent.putExtra(AgentInfoViewActivity.AGENT_UUID, agentID)
-        startActivity(intent)
-    }
-     */
 
     override fun onDestroyView() {
         super.onDestroyView()

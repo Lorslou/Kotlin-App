@@ -10,8 +10,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 /**
- * Módulo que nos proveerá dependencias de librerías o de clases que contienen interfaces
- * -> Los módulos proveen dependencias que pueden ser usadas en otros lugares del código
+ * This module will provide dependencies for libraries or classes that contain interfaces.
+ * -> Modules provide dependencies that can be used in other parts of the code
  */
 @Module
 @InstallIn(SingletonComponent::class)

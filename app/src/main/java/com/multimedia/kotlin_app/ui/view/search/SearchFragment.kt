@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -18,10 +17,12 @@ import androidx.navigation.fragment.findNavController
 import com.multimedia.kotlin_app.R
 import com.multimedia.kotlin_app.ui.viewmodel.AgentSearchViewModel
 import com.multimedia.kotlin_app.ui.view.detail.AgentInfoFragment.Companion.AGENT_UUID
-import com.multimedia.kotlin_app.ui.viewmodel.SearchFavoritesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-
+/**
+ * Fragment that displays the interface of the search screen and contains the
+ * logic of the viewmodel
+ */
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
 
@@ -70,17 +71,6 @@ class SearchFragment : Fragment() {
             binding.progressBar.isVisible = it
         }
 
-        /*
-        searchViewModel.agentDisplay.observe(viewLifecycleOwner) {
-            if (it != null) {
-                adapter.updateAdapter(it)
-            } else {
-                showAlertDialog()
-                adapter.clearAdapter()
-            }
-        }
-        */
-
         searchViewModel.filteredAgentList.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 adapter.updateAdapter(it)
@@ -102,17 +92,16 @@ class SearchFragment : Fragment() {
     }
 
     /*
-    Se anula la referencia _binding al objeto Binding, estableciéndola en null. Esto asegura que cualquier referencia
-    a las vistas del layout en el fragmento se elimina correctamente y se libera la memoria asociada con el layout.
-    garantiza que la referencia a las vistas se libere en el momento adecuado, ya que el fragmento
-    aún puede estar en memoria después de que su vista haya sido destruida
+    The _binding reference to the Binding object is set to null. This ensures that any references
+    to the views in the fragment's layout are properly cleared and the associated memory is released.
+    It guarantees that the reference to the views is released at the appropriate time, as the fragment
+    may still be in memory even after its view has been destroyed
      */
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
-    // TODO DELEGATE RESPONSIBILITY TO THE VIEWMODEL
     private fun showAlertDialog() {
         val alertDialog = AlertDialog.Builder(requireContext())
             .setMessage("Try searching something else")

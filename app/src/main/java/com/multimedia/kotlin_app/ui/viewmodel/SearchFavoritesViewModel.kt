@@ -11,31 +11,16 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * This class will manage the data and logic related to the favorite agents search screen
+ */
 @HiltViewModel
 class SearchFavoritesViewModel @Inject constructor(
-    private val getSpecificAgentUseCase: GetSpecificAgentUseCase,
     private val getFavoriteAgents: GetAllFavoriteAgentsUseCase
 ) : ViewModel() {
     val agentDisplay = MutableLiveData<AgentDataDisplay?>()
     val dataLoading = MutableLiveData<Boolean>()
     val favoriteAgents = MutableLiveData<List<AgentEntityFavs>>()
-
-/*
-    fun onCreateSearchView(agentID: String) {
-        viewModelScope.launch {
-            dataLoading.postValue(true)
-            val searchResult = getSpecificAgentUseCase.invoke(agentID)
-            if (searchResult != null) {
-                agentDisplay.postValue(searchResult)
-            } else {
-                agentDisplay.postValue(null)
-            }
-            dataLoading.postValue(false)
-
-        }
-    }
-
- */
 
     fun onCreateFavoritesView() {
         viewModelScope.launch {

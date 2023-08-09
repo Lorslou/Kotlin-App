@@ -9,6 +9,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * This class allows you to manage the data and logic related to the home screen of the application
+ */
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getAllAgentsUseCase: GetAllAgentsUseCase
@@ -16,7 +19,7 @@ class HomeViewModel @Inject constructor(
     val dataLoading = MutableLiveData<Boolean>()
     val agentsDisplay = MutableLiveData<List<AgentDataDisplay>?>()
 
-    fun onCreateFavoritesView() {
+    fun onCreateHomeView() {
         viewModelScope.launch {
             val allAgents = getAllAgentsUseCase.invoke()
             agentsDisplay.postValue(allAgents)

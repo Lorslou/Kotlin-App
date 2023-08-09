@@ -11,6 +11,9 @@ import com.multimedia.kotlin_app.data.database.entities.AgentEntity
 import com.multimedia.kotlin_app.data.database.entities.AgentEntityFavs
 import com.multimedia.kotlin_app.data.database.entities.AgentRoleEntity
 
+/**
+ * Specifies the entities of the database, the database version, and the necessary type converters
+ */
 @Database(
     entities = [AgentEntity::class, AgentAbilitiesEntity::class, AgentRoleEntity::class, AgentEntityFavs::class],
     version = 1

@@ -6,6 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.multimedia.kotlin_app.R
 import com.multimedia.kotlin_app.data.model.AgentDataDisplay
 
+/**
+ * This is an adapter used to display all the agents in the RecyclerView of the home fragment
+ */
 class HomeAdapter(
     private var agentList: List<AgentDataDisplay> = emptyList()
 ) :

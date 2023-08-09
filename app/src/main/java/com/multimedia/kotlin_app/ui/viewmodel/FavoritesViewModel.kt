@@ -9,6 +9,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * The purpose of this class is to manage the data and logic related to the list of favorite agents
+ * in the application
+ */
 @HiltViewModel
 class FavoritesViewModel @Inject constructor(
     private val getFavoriteAgents: GetAllFavoriteAgentsUseCase

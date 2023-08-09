@@ -12,7 +12,8 @@
         tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_agentInfoFragment"
-            app:destination="@id/agentInfoFragment" />
+            app:destination="@id/agentInfoFragment"
+            app:launchSingleTop="true" />
     </fragment>
 
     <fragment
@@ -28,7 +29,8 @@
         tools:layout="@layout/fragment_show_favorites">
     <action
         android:id="@+id/action_favoritesFragment_to_agentInfoFragment"
-        app:destination="@id/agentInfoFragment" />
+        app:destination="@id/agentInfoFragment"
+        app:launchSingleTop="true"/>
     </fragment>
 
     <fragment

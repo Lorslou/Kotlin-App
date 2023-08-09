@@ -6,6 +6,10 @@ import coil.load
 import com.multimedia.kotlin_app.data.model.AgentDataDisplay
 import com.multimedia.kotlin_app.databinding.ItemAgentBinding
 
+/**
+ * This class is responsible for binding the data from AgentDataDisplay to the view elements
+ * in each item of the RecyclerView on the home screen
+ */
 class HomeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val binding = ItemAgentBinding.bind(view)
