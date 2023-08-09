@@ -25,7 +25,11 @@
         android:id="@+id/favoritesFragment"
         android:name="com.multimedia.kotlin_app.ui.view.favorites.ShowFavoritesFragment"
         android:label="fragment_favorites"
-        tools:layout="@layout/fragment_show_favorites" />
+        tools:layout="@layout/fragment_show_favorites">
+    <action
+        android:id="@+id/action_favoritesFragment_to_agentInfoFragment"
+        app:destination="@id/agentInfoFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/agentInfoFragment"

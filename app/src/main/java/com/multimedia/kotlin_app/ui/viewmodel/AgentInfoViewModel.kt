@@ -1,5 +1,6 @@
 package com.multimedia.kotlin_app.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,6 +9,7 @@ import com.multimedia.kotlin_app.data.AgentRepository
 import com.multimedia.kotlin_app.data.database.entities.AgentEntityFavs
 import com.multimedia.kotlin_app.data.model.Agent
 import com.multimedia.kotlin_app.data.model.AgentDataDisplay
+import com.multimedia.kotlin_app.domain.uc.GetAllAgentsUseCase
 import com.multimedia.kotlin_app.domain.uc.GetSpecificAgentUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -16,18 +18,24 @@ import javax.inject.Inject
 @HiltViewModel
 class AgentInfoViewModel @Inject constructor(
     private val repository: AgentRepository,
-    private val getSpecificAgentUseCase: GetSpecificAgentUseCase
+    private val getSpecificAgentUseCase: GetSpecificAgentUseCase,
+    private val getAllAgentsUseCase: GetAllAgentsUseCase
 ) : ViewModel() {
 
     val favOnOff = MutableLiveData<Boolean>()
     val agentData = MutableLiveData<AgentDataDisplay?>()
+    //val agentData = MutableLiveData<List<AgentDataDisplay>?>()
     val goBack = MutableLiveData<Unit>()
 
-    fun onCreate(agentID: String) {
+
+    fun onCreate(agentName: String) {
         viewModelScope.launch {
-            val searchResult = getSpecificAgentUseCase.invoke(agentID)
-            agentData.postValue(searchResult)
-            val agentFav = repository.getAgentFromFavorites(agentID)
+            val searchResult = getAllAgentsUseCase.invoke()
+            val filteredAgent = searchResult?.find { agent ->
+                agent.uuid.equals(agentName.trim(), ignoreCase = true)
+            }
+            agentData.postValue(filteredAgent)
+            val agentFav = repository.getAgentFromFavorites(agentName)
             if (agentFav == null) {
                 favOnOff.postValue(false)
             } else {
@@ -36,6 +44,8 @@ class AgentInfoViewModel @Inject constructor(
         }
 
     }
+
+    /*
 
     fun switchFavoriteAgent(agentID: String) {
         viewModelScope.launch  {
@@ -62,6 +72,8 @@ class AgentInfoViewModel @Inject constructor(
             }
         }
     }
+
+     */
 
     fun goBackToSearch() {
         goBack.postValue(Unit)

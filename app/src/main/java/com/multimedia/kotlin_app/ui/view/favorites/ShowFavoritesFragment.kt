@@ -1,28 +1,27 @@
 package com.multimedia.kotlin_app.ui.view.favorites
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.multimedia.kotlin_app.R
-import com.multimedia.kotlin_app.databinding.FragmentSearchBinding
 import com.multimedia.kotlin_app.databinding.FragmentShowFavoritesBinding
-import com.multimedia.kotlin_app.ui.view.AgentInfoViewActivity
-import com.multimedia.kotlin_app.ui.viewmodel.AgentSearchViewModel
-import com.multimedia.kotlin_app.ui.viewmodel.FavoritesViewModel
+import com.multimedia.kotlin_app.ui.view.detail.AgentInfoFragment
+import com.multimedia.kotlin_app.ui.viewmodel.SearchFavoritesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class ShowFavoritesFragment : Fragment() {
 
-    private val favoritesViewModel by viewModels<FavoritesViewModel>()
+    private val favoritesViewModel: SearchFavoritesViewModel by viewModels()
 
     private var _binding: FragmentShowFavoritesBinding? = null
     private val binding get() = _binding!!
@@ -44,7 +43,7 @@ class ShowFavoritesFragment : Fragment() {
     }
 
     private fun initUI() {
-        favoritesViewModel.onCreate()
+        favoritesViewModel.onCreateFavoritesView()
         adapter = FavoritesAdapter {agentID -> accessToAgentInfo(agentID)}
         binding.rvAgent.setHasFixedSize(true)
         binding.rvAgent.layoutManager = LinearLayoutManager(requireContext())
@@ -63,10 +62,18 @@ class ShowFavoritesFragment : Fragment() {
     }
 
     private fun accessToAgentInfo(agentID: String) {
+        val bundle = bundleOf(AgentInfoFragment.AGENT_UUID to agentID)
+        val navController = findNavController()
+        navController.navigate(R.id.action_favoritesFragment_to_agentInfoFragment, bundle)
+    }
+
+    /*
+    private fun accessToAgentInfo(agentID: String) {
         val intent = Intent(requireContext(), AgentInfoViewActivity::class.java)
         intent.putExtra(AgentInfoViewActivity.AGENT_UUID, agentID)
         startActivity(intent)
     }
+     */
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -15,12 +15,14 @@ class AgentRepository @Inject constructor(
 ) {
 
 
+    /*
     suspend fun getAgentById(agentID: String): AgentDataDisplay? {
     val service = api.getAgent(agentID)
     return service
     }
+    */
 
-    suspend fun getAllAgents(): Agent? {
+    suspend fun getAllAgents(): List<AgentDataDisplay>? {
         val service = api.getAllAgents()
         return service
     }
