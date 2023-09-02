@@ -26,12 +26,6 @@ class AgentRepository @Inject constructor(
         return agentDao.checkIfAgentFavorite(agentID)
     }
 
-    suspend fun updateAgent(agent: AgentEntityFavs) {
-        withContext(Dispatchers.IO){
-            agentDao.updateAgent(agent)
-        }
-    }
-
     suspend fun getFavoriteAgents(): List<AgentEntityFavs>{
         return withContext(Dispatchers.IO){
             agentDao.getFavoriteAgents()
@@ -40,6 +34,12 @@ class AgentRepository @Inject constructor(
 
     suspend fun addAgentToFavorites(agent: AgentEntityFavs) {
         agentDao.insertFavoriteAgent(agent)
+    }
+
+    suspend fun updateAgent(agent: AgentEntityFavs) {
+        withContext(Dispatchers.IO){
+            agentDao.updateAgent(agent)
+        }
     }
 
     suspend fun deleteAgentFromFavorites(agent: AgentEntityFavs) {

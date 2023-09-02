@@ -36,14 +36,14 @@
                 android:textSize="85sp"
                 tools:text="HOLA" />
 
-            <ImageView
+          <!--  <ImageView
                 android:id="@+id/ivFav"
                 android:layout_width="55dp"
                 android:layout_height="50dp"
                 android:layout_marginHorizontal="13dp"
                 android:layout_marginTop="12dp"
                 android:src="@drawable/ic_favoriteoff"
-                app:tint="@color/white" />
+                app:tint="@color/white" /> -->
 
 
         </FrameLayout>

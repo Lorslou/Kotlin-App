@@ -14,9 +14,10 @@ class HomeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val binding = ItemAgentBinding.bind(view)
 
-    fun render(agentDataDisplay: AgentDataDisplay) {
+    fun render(agentDataDisplay: AgentDataDisplay, accessToAgentInfo: (String) -> Unit) {
         binding.tvAgentName.text = agentDataDisplay.agentName
         binding.ivAgent.load(agentDataDisplay.agentIcon)
+        binding.root.setOnClickListener { accessToAgentInfo(agentDataDisplay.uuid) }
 
     }
 }

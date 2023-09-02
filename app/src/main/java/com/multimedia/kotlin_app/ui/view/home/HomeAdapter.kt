@@ -9,10 +9,9 @@ import com.multimedia.kotlin_app.data.model.AgentDataDisplay
 /**
  * This is an adapter used to display all the agents in the RecyclerView of the home fragment
  */
-class HomeAdapter(
-    private var agentList: List<AgentDataDisplay> = emptyList()
-) :
+class HomeAdapter(private val accessToAgentInfo: (String) -> Unit) :
     RecyclerView.Adapter<HomeViewHolder>() {
+    private var agentList: List<AgentDataDisplay> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         return HomeViewHolder(
@@ -21,7 +20,7 @@ class HomeAdapter(
     }
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
-        holder.render(agentList[position])
+        holder.render(agentList[position], accessToAgentInfo)
     }
 
     override fun getItemCount() = agentList.size

@@ -67,11 +67,9 @@ class AgentInfoFragment : Fragment() {
             }
         })
 
-
         agentViewModel.agentData.observe(viewLifecycleOwner, Observer {
             adapter.updateAdapter(it!!)
         })
-
 
         agentViewModel.goBack.observe(viewLifecycleOwner, Observer {
             findNavController().popBackStack()
