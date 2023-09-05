@@ -10,9 +10,7 @@ data class Agent(
     @SerializedName("data") val data: List<AgentDataDisplay>
 )
 
-/**
- * This class represents the data model used to store information related to API calls
- */
+
 data class AgentDataDisplay(
     @SerializedName("uuid") val uuid: String,
     @SerializedName("displayName") val agentName: String,
@@ -24,18 +22,13 @@ data class AgentDataDisplay(
     @SerializedName("abilities") val agentAbilities: List<AgentAbilities>
 )
 
-/**
- * This class represents the data model used to store information related to API calls
- */
+
 data class AgentRole(
     @SerializedName("uuid") val roleUuid: String,
     @SerializedName("displayIcon") val agentRoleIcon: String,
     @SerializedName("displayName") val agentRoleName: String
 )
 
-/**
- * This class represents the data model used to store information related to API calls
- */
 data class AgentAbilities(
     @SerializedName("slot") val abilitiesSlot: String,
     @SerializedName("displayName") val abilitiesName: String,

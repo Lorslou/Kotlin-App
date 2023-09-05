@@ -58,10 +58,11 @@ class ShowFavoritesFragment : Fragment() {
             if (it != null) {
                 adapter.updateAdapter(it)
             } else {
-                Toast.makeText(requireContext(), "Todavía no existen favoritos", Toast.LENGTH_SHORT)
+                Toast.makeText(requireContext(), "Todavía no existen favoritos", Toast.LENGTH_SHORT) //TODO
                     .show()
             }
         })
+
     }
 
     private fun accessToAgentInfo(agentID: String) {

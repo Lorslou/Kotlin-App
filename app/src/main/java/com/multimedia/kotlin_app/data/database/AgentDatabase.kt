@@ -25,12 +25,3 @@ abstract class AgentDatabase : RoomDatabase() {
     abstract fun getAgentDao(): AgentDao
 }
 
-/*
-@Database(entities = [AgentEntity::class, AgentAbilitiesEntity::class, AgentRoleEntity::class], version = 1)
-@TypeConverters(AgentRoleConverter::class, AgentAbilitiesConverter::class)
-abstract class AgentDatabase: RoomDatabase() {
-
-    //por cada DAO se crea una abstract fun
-    abstract fun getAgentDao():AgentDao
-}
- */

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.multimedia.kotlin_app.R
 import com.multimedia.kotlin_app.databinding.FragmentHomeBinding
 import com.multimedia.kotlin_app.ui.view.detail.AgentInfoFragment
+import com.multimedia.kotlin_app.ui.view.home.filter.FilterRoleAdapter
 import com.multimedia.kotlin_app.ui.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

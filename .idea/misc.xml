@@ -4,10 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/usuario/AndroidStudioProjects/KotlinApp/app/src/main/res/drawable/bottom_bav_swap_color.xml" value="0.1615" />
+        <entry key="..\:/Users/usuario/AndroidStudioProjects/KotlinApp/app/src/main/res/drawable/bottom_nav_swap_color.xml" value="0.165" />
         <entry key="..\:/Users/usuario/AndroidStudioProjects/KotlinApp/app/src/main/res/drawable/ic_favoriteoff.xml" value="0.1955" />
         <entry key="..\:/Users/usuario/AndroidStudioProjects/KotlinApp/app/src/main/res/drawable/ic_favoriteon.xml" value="0.1615" />
         <entry key="..\:/Users/usuario/AndroidStudioProjects/KotlinApp/app/src/main/res/drawable/ic_goback_arrow.xml" value="0.1615" />
         <entry key="..\:/Users/usuario/AndroidStudioProjects/KotlinApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.124" />
+        <entry key="..\:/Users/usuario/AndroidStudioProjects/KotlinApp/app/src/main/res/drawable/ic_navbar_home.xml" value="0.165" />
+        <entry key="..\:/Users/usuario/AndroidStudioProjects/KotlinApp/app/src/main/res/drawable/ic_navbar_search.xml" value="0.165" />
         <entry key="..\:/Users/usuario/AndroidStudioProjects/KotlinApp/app/src/main/res/drawable/searchview_background.xml" value="0.1615" />
         <entry key="..\:/Users/usuario/AndroidStudioProjects/KotlinApp/app/src/main/res/drawable/splash_background.xml" value="0.264" />
         <entry key="..\:/Users/usuario/AndroidStudioProjects/KotlinApp/app/src/main/res/layout/activity_agent_info_view.xml" value="0.264" />
@@ -25,6 +28,8 @@
         <entry key="..\:/Users/usuario/AndroidStudioProjects/KotlinApp/app/src/main/res/layout/fragment_show_favorites.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/usuario/AndroidStudioProjects/KotlinApp/app/src/main/res/layout/item_agent.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/usuario/AndroidStudioProjects/KotlinApp/app/src/main/res/layout/item_agent_error_dialog.xml" value="0.253125" />
+        <entry key="..\:/Users/usuario/AndroidStudioProjects/KotlinApp/app/src/main/res/layout/item_agent_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/usuario/AndroidStudioProjects/KotlinApp/app/src/main/res/layout/item_class_filter.xml" value="0.4" />
         <entry key="..\:/Users/usuario/AndroidStudioProjects/KotlinApp/app/src/main/res/layout/item_info_agent_view.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/usuario/AndroidStudioProjects/KotlinApp/app/src/main/res/layout/item_search_error_dialog.xml" value="0.253125" />
         <entry key="..\:/Users/usuario/AndroidStudioProjects/KotlinApp/app/src/main/res/menu/bottom_navbar.xml" value="0.253125" />

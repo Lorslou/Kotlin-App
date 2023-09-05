@@ -16,6 +16,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getAllAgentsUseCase: GetAllAgentsUseCase
 ) : ViewModel() {
+
+    //var agentsFilter: List<AgentDataDisplay>? = null
     val dataLoading = MutableLiveData<Boolean>()
     val agentsDisplay = MutableLiveData<List<AgentDataDisplay>?>()
 
@@ -23,6 +25,30 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             val allAgents = getAllAgentsUseCase.invoke()
             agentsDisplay.postValue(allAgents)
+
+            //applyRoleFilter()
+
         }
     }
+
 }
+
+/*
+    fun applyRoleFilter(role: String? = null) {
+        val filterByRole = if (role.isNullOrBlank()) {
+            agentsFilter
+        } else {
+            agentsFilter?.filter { it.agentRole.agentRoleName == role }
+        }
+        agentsDisplay.postValue(filterByRole)
+    }
+     */
+
+/*
+    fun applyRoleFilter(role: String) {
+        val filterByRole = agentsFilter?.filter {
+            it.agentRole.agentRoleName == role
+        }
+        agentsDisplay.postValue(filterByRole)
+    }
+     */

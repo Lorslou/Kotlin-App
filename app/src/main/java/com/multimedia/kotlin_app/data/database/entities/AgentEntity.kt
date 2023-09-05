@@ -19,9 +19,7 @@ data class AgentEntity(
     @ColumnInfo(name = "agentAbilities") val agentAbilities: List<AgentAbilitiesEntity>,
 )
 
-/**
- * This class represents the abilities entity for an agent in the context of the database using ROOM
- */
+
 @Entity(tableName = "agent_abilities")
 data class AgentAbilitiesEntity(
     @PrimaryKey @ColumnInfo(name = "abilitiesSlot") val abilitiesSlot: String,
@@ -29,9 +27,7 @@ data class AgentAbilitiesEntity(
     @ColumnInfo(name = "abilitiesIcon") val abilitiesIcon: String
 )
 
-/**
- * This class represents the role entity for an agent in the context of the database using ROOM
- */
+
 @Entity(tableName = "agent_role")
 data class AgentRoleEntity(
     @PrimaryKey @ColumnInfo(name = "roleUuid") val roleUuid: String,
@@ -39,9 +35,7 @@ data class AgentRoleEntity(
     @ColumnInfo(name = "agentRoleName") val agentRoleName: String
 )
 
-/**
- * This class represents the favorites entity for an agent in the context of the database using ROOM
- */
+
 @Entity(tableName = "agent_favorites_table")
 data class AgentEntityFavs(
     @PrimaryKey @ColumnInfo(name = "uuid") val uuid: String,

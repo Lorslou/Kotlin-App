@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Information"
-            android:textColor="@color/purple_700"
+            android:textColor="@color/red_emphasis"
             android:textSize="18sp"
             android:textStyle="bold" />
 

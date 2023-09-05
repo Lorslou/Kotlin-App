@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.multimedia.kotlin_app.databinding.FragmentSearchBinding
 import androidx.navigation.fragment.findNavController
 import com.multimedia.kotlin_app.R
-import com.multimedia.kotlin_app.ui.viewmodel.AgentSearchViewModel
 import com.multimedia.kotlin_app.ui.view.detail.AgentInfoFragment.Companion.AGENT_UUID
+import com.multimedia.kotlin_app.ui.viewmodel.SearchFavoritesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -26,7 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
 
-    private val searchViewModel: AgentSearchViewModel by viewModels()
+    private val searchViewModel: SearchFavoritesViewModel by viewModels()
 
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
@@ -51,13 +51,13 @@ class SearchFragment : Fragment() {
     private fun initUI() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                searchViewModel.onCreate(query.orEmpty())
-
                 return false
             }
 
-            override fun onQueryTextChange(newText: String?) =
-                false
+            override fun onQueryTextChange(query: String?): Boolean {
+                searchViewModel.onCreateSearch(query.orEmpty())
+                return true
+            }
         })
 
         adapter = AgentAdapter { agentID -> accessToAgentInfo(agentID) }
@@ -80,6 +80,7 @@ class SearchFragment : Fragment() {
             }
         })
 
+        //TODO
         searchViewModel.showDialog.observe(viewLifecycleOwner, Observer {
 
         })
@@ -90,13 +91,7 @@ class SearchFragment : Fragment() {
         val navController = findNavController()
         navController.navigate(R.id.action_searchFragment_to_agentInfoFragment, bundle)
     }
-
-    /*
-    The _binding reference to the Binding object is set to null. This ensures that any references
-    to the views in the fragment's layout are properly cleared and the associated memory is released.
-    It guarantees that the reference to the views is released at the appropriate time, as the fragment
-    may still be in memory even after its view has been destroyed
-     */
+    
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

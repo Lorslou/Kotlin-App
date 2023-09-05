@@ -5,8 +5,7 @@ import com.multimedia.kotlin_app.data.model.AgentDataDisplay
 import javax.inject.Inject
 
 /**
- * This class implements a use case that is used to fetch all agents. It promotes
- * separation of responsibilities in the app
+ * This class implements a use case that is used to fetch all agents
  */
 class GetAllAgentsUseCase @Inject constructor(
     private val repository: AgentRepository

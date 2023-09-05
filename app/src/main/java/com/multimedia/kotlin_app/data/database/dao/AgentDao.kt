@@ -16,10 +16,6 @@ interface AgentDao {
     @Query("SELECT * FROM agent_favorites_table WHERE uuid = :agentID")
     suspend fun getAgentRequestedByUser(agentID:String): AgentEntityFavs
 
-    /*
-    @Query("SELECT * FROM agent_favorites_table WHERE uuid = :agentID")
-    suspend fun checkIfAgentFavorite(agentID: String): AgentEntityFavs
-*/
     @Query("SELECT * FROM agent_favorites_table WHERE uuid = :agentNameUser")
     suspend fun checkIfAgentFavorite(agentNameUser: String): AgentEntityFavs
 
@@ -32,7 +28,7 @@ interface AgentDao {
     @Query("DELETE FROM agent_data_table")
     suspend fun deleteAllAgents()
 
-    //en SQLite se usa = 1 para referirnos a true
+    // en SQLite se usa = 1 para referirnos a true
     @Query("SELECT * FROM agent_favorites_table WHERE isFavorite = 1")
     suspend fun getFavoriteAgents(): List<AgentEntityFavs>
 
