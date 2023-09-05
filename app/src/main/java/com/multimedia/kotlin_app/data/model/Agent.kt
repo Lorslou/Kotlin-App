@@ -2,10 +2,14 @@ package com.multimedia.kotlin_app.data.model
 
 import com.google.gson.annotations.SerializedName
 
+/**
+ * This class represents the data model used to store information related to API calls
+ */
 data class Agent(
     @SerializedName("status") val status: Int,
     @SerializedName("data") val data: List<AgentDataDisplay>
 )
+
 
 data class AgentDataDisplay(
     @SerializedName("uuid") val uuid: String,
@@ -17,6 +21,7 @@ data class AgentDataDisplay(
     @SerializedName("bustPortrait") val agentInfoPortrait: String,
     @SerializedName("abilities") val agentAbilities: List<AgentAbilities>
 )
+
 
 data class AgentRole(
     @SerializedName("uuid") val roleUuid: String,

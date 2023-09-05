@@ -10,6 +10,10 @@ import androidx.navigation.ui.setupWithNavController
 import com.multimedia.kotlin_app.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Represents the main activity of the application. It configures the user interface, navigation
+ * controller, and data binding to enable navigation between fragments using the BottomNavigationView.
+ */
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
@@ -35,26 +39,5 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setupWithNavController(navController)
 
     }
-
-    private fun linkFragment(fragment: Fragment) {
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frameContainer,fragment)
-        fragmentTransaction.commit()
-    }
-
-    /*
-    private fun fragmentListener() {
-        binding.bottomNavigationView.setOnItemReselectedListener {
-            when(it.itemId) {
-                binding.bottomNavigationView.menu.getItem(0).itemId -> linkFragment(SearchFragment())
-                binding.bottomNavigationView.menu.getItem(1).itemId -> linkFragment(HomeFragment())
-                binding.bottomNavigationView.menu.getItem(2).itemId -> linkFragment(ShowFavoritesFragment())
-            }
-        }
-    }
-     */
-
-
 
 }

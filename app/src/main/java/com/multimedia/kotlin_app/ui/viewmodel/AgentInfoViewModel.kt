@@ -1,30 +1,29 @@
 package com.multimedia.kotlin_app.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavController
 import com.multimedia.kotlin_app.data.AgentRepository
 import com.multimedia.kotlin_app.data.database.entities.AgentEntityFavs
-import com.multimedia.kotlin_app.data.model.Agent
 import com.multimedia.kotlin_app.data.model.AgentDataDisplay
 import com.multimedia.kotlin_app.domain.uc.GetAllAgentsUseCase
-import com.multimedia.kotlin_app.domain.uc.GetSpecificAgentUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * This class is responsible for managing the data and view logic for the agent detail in the
+ * application. It handles fetching the agent data, managing the favorite state, and controlling
+ * the back navigation in the agent detail view
+ */
 @HiltViewModel
 class AgentInfoViewModel @Inject constructor(
     private val repository: AgentRepository,
-    private val getSpecificAgentUseCase: GetSpecificAgentUseCase,
     private val getAllAgentsUseCase: GetAllAgentsUseCase
 ) : ViewModel() {
 
     val favOnOff = MutableLiveData<Boolean>()
     val agentData = MutableLiveData<AgentDataDisplay?>()
-    //val agentData = MutableLiveData<List<AgentDataDisplay>?>()
     val goBack = MutableLiveData<Unit>()
 
 
@@ -45,35 +44,34 @@ class AgentInfoViewModel @Inject constructor(
 
     }
 
-    /*
-
     fun switchFavoriteAgent(agentID: String) {
         viewModelScope.launch  {
-            val agentFav = repository.getAgentFromFavorites(agentID) //comprueba si el agente ya está en la tabla de favoritos
-            if (agentFav == null) { // Si devuelve null, el agente no está en favoritos, lo insertamos
-                val agentData = repository.getAgentById(agentID)
+            val agentFav = repository.getAgentFromFavorites(agentID) // checks if the agent is already in the favorites table
+            if (agentFav == null) { // if it returns null, the agent is not in favorites, so we insert it
+                val agentData = repository.getAllAgents()
+                val filteredAgent = agentData?.find { agent ->
+                    agent.uuid.equals(agentID.trim(), ignoreCase = true)
+                }
                 val newAgentFav = AgentEntityFavs(
-                    agentData?.uuid.orEmpty(),
-                    agentData?.agentName.orEmpty(),
-                    agentData?.agentIcon.orEmpty(),
+                    filteredAgent?.uuid.orEmpty(),
+                    filteredAgent?.agentName.orEmpty(),
+                    filteredAgent?.agentIcon.orEmpty(),
                     true
                 )
                 favOnOff.postValue(true)
                 repository.addAgentToFavorites(newAgentFav)
             } else {
-                // El agente ya está en favoritos, actualizamos el campo isFavorite
+                // the agent is already in favorites, so we update the isFavorite field
                 agentFav.isFavorite = !agentFav.isFavorite
-                if (!agentFav.isFavorite) { //si isFavorite está en false
+                if (!agentFav.isFavorite) { // if isFavorite is false
                     repository.deleteAgentFromFavorites(agentFav)
                     favOnOff.postValue(false)
-                } else { //el agente es favorito, actualiza los datos en la tabla de favs
+                } else { // the agent is favorite, update the data in the favorites table
                     repository.updateAgent(agentFav)
                 }
             }
         }
     }
-
-     */
 
     fun goBackToSearch() {
         goBack.postValue(Unit)

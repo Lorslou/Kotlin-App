@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -16,16 +15,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.multimedia.kotlin_app.databinding.FragmentSearchBinding
 import androidx.navigation.fragment.findNavController
 import com.multimedia.kotlin_app.R
-import com.multimedia.kotlin_app.ui.viewmodel.AgentSearchViewModel
 import com.multimedia.kotlin_app.ui.view.detail.AgentInfoFragment.Companion.AGENT_UUID
 import com.multimedia.kotlin_app.ui.viewmodel.SearchFavoritesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-
+/**
+ * Fragment that displays the interface of the search screen and contains the
+ * logic of the viewmodel
+ */
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
 
-    private val searchViewModel: AgentSearchViewModel by viewModels()
+    private val searchViewModel: SearchFavoritesViewModel by viewModels()
 
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
@@ -50,13 +51,13 @@ class SearchFragment : Fragment() {
     private fun initUI() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                searchViewModel.onCreate(query.orEmpty())
-
                 return false
             }
 
-            override fun onQueryTextChange(newText: String?) =
-                false
+            override fun onQueryTextChange(query: String?): Boolean {
+                searchViewModel.onCreateSearch(query.orEmpty())
+                return true
+            }
         })
 
         adapter = AgentAdapter { agentID -> accessToAgentInfo(agentID) }
@@ -70,17 +71,6 @@ class SearchFragment : Fragment() {
             binding.progressBar.isVisible = it
         }
 
-        /*
-        searchViewModel.agentDisplay.observe(viewLifecycleOwner) {
-            if (it != null) {
-                adapter.updateAdapter(it)
-            } else {
-                showAlertDialog()
-                adapter.clearAdapter()
-            }
-        }
-        */
-
         searchViewModel.filteredAgentList.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 adapter.updateAdapter(it)
@@ -90,6 +80,7 @@ class SearchFragment : Fragment() {
             }
         })
 
+        //TODO
         searchViewModel.showDialog.observe(viewLifecycleOwner, Observer {
 
         })
@@ -100,19 +91,12 @@ class SearchFragment : Fragment() {
         val navController = findNavController()
         navController.navigate(R.id.action_searchFragment_to_agentInfoFragment, bundle)
     }
-
-    /*
-    Se anula la referencia _binding al objeto Binding, estableciéndola en null. Esto asegura que cualquier referencia
-    a las vistas del layout en el fragmento se elimina correctamente y se libera la memoria asociada con el layout.
-    garantiza que la referencia a las vistas se libere en el momento adecuado, ya que el fragmento
-    aún puede estar en memoria después de que su vista haya sido destruida
-     */
+    
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
-    // TODO DELEGATE RESPONSIBILITY TO THE VIEWMODEL
     private fun showAlertDialog() {
         val alertDialog = AlertDialog.Builder(requireContext())
             .setMessage("Try searching something else")

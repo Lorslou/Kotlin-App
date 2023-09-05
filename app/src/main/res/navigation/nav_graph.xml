@@ -12,14 +12,19 @@
         tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_agentInfoFragment"
-            app:destination="@id/agentInfoFragment" />
+            app:destination="@id/agentInfoFragment"
+            app:launchSingleTop="true" />
     </fragment>
 
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.multimedia.kotlin_app.ui.view.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_agentInfoFragment"
+            app:destination="@id/agentInfoFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/favoritesFragment"
@@ -28,7 +33,8 @@
         tools:layout="@layout/fragment_show_favorites">
     <action
         android:id="@+id/action_favoritesFragment_to_agentInfoFragment"
-        app:destination="@id/agentInfoFragment" />
+        app:destination="@id/agentInfoFragment"
+        app:launchSingleTop="true"/>
     </fragment>
 
     <fragment

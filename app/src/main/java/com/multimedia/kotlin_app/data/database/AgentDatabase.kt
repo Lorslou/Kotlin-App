@@ -11,6 +11,9 @@ import com.multimedia.kotlin_app.data.database.entities.AgentEntity
 import com.multimedia.kotlin_app.data.database.entities.AgentEntityFavs
 import com.multimedia.kotlin_app.data.database.entities.AgentRoleEntity
 
+/**
+ * Specifies the entities of the database, the database version, and the necessary type converters
+ */
 @Database(
     entities = [AgentEntity::class, AgentAbilitiesEntity::class, AgentRoleEntity::class, AgentEntityFavs::class],
     version = 1
@@ -22,12 +25,3 @@ abstract class AgentDatabase : RoomDatabase() {
     abstract fun getAgentDao(): AgentDao
 }
 
-/*
-@Database(entities = [AgentEntity::class, AgentAbilitiesEntity::class, AgentRoleEntity::class], version = 1)
-@TypeConverters(AgentRoleConverter::class, AgentAbilitiesConverter::class)
-abstract class AgentDatabase: RoomDatabase() {
-
-    //por cada DAO se crea una abstract fun
-    abstract fun getAgentDao():AgentDao
-}
- */

@@ -1,18 +1,19 @@
 package com.multimedia.kotlin_app.ui.view.detail
 
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.multimedia.kotlin_app.data.model.AgentDataDisplay
 import com.multimedia.kotlin_app.databinding.ItemInfoAgentViewBinding
 
-
+/**
+ * This class is responsible for maintaining and updating the view for each item in the
+ * RecyclerView of the AgentInfoAdapter
+ */
 class AgentInfoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val binding = ItemInfoAgentViewBinding.bind(view)
 
     fun render(agentData: AgentDataDisplay) {
-        Log.i("lorena", "Rendering agent: ${agentData.agentName}")
         binding.ivBackground.load(agentData.agentBackground)
         binding.ivAgentImage.load(agentData.agentInfoPortrait)
         binding.tvAgentName.text = agentData.agentName

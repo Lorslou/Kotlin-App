@@ -5,9 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.multimedia.kotlin_app.R
 import com.multimedia.kotlin_app.data.model.AgentDataDisplay
-import com.multimedia.kotlin_app.ui.view.home.HomeViewHolder
 
-
+/**
+ * This is an adapter used to display agent detail information in the RecyclerView
+ * of the detail fragment
+ */
 class AgentInfoAdapter(
     private var agentInfo: AgentDataDisplay? = null
 ) : RecyclerView.Adapter<AgentInfoViewHolder>() {
@@ -28,6 +30,4 @@ class AgentInfoAdapter(
         this.agentInfo = agentSearch
         notifyDataSetChanged()
     }
-
-
 }
